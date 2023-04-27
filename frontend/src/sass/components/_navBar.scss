@@ -1,0 +1,38 @@
+.search {
+  max-width: 470px;
+  width: 470px;
+  &-input {
+    z-index: 0;
+    color: #1e0d03;
+    width: inherit;
+    outline: none;
+    border: none;
+    border-radius: 10px;
+    font-family: Montserrat;
+    font-style: Italic;
+    font-size: 15px;
+    line-height: 200px;
+    line-height: 100%;
+    background-color: #ede6e6;
+    padding: 10px 10px 10px 16px;
+  }
+  svg {
+    font-size: 24px;
+  }
+}
+.btn-search {
+  right: 15px;
+}
+
+.router {
+  width: 446px;
+}
+
+.user {
+  & > div:first-child {
+    margin-left: 0.7rem;
+  }
+  & > div:nth-child(2) {
+    margin-right: 6px;
+  }
+}

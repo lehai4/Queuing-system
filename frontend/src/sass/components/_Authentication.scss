@@ -1,0 +1,65 @@
+$width-authentication: 848px;
+.authentication {
+  min-height: 100vh;
+}
+.authentication-img {
+  background-color: #ffffff;
+  width: $width-authentication;
+  max-width: $width-authentication;
+}
+.authentication-content {
+  h2 {
+    font-size: 36px;
+    line-height: 54px;
+    color: #ff7506;
+    text-transform: uppercase;
+    font-weight: 1000;
+  }
+  h3 {
+    color: #ff7506;
+    font-size: 34px;
+    line-height: 51px;
+  }
+}
+.authenform {
+  min-height: 100vh;
+  background-color: rgba(0, 0, 0, 0.09);
+}
+.form__group {
+  padding-top: 0;
+  padding-bottom: 0;
+  margin-top: 0;
+  margin-bottom: 0;
+  h3 {
+    font-size: 22px;
+    color: #282739;
+    font-weight: 700;
+    line-height: 33px;
+  }
+  label {
+    margin-top: 4px;
+    font-size: 18px;
+    line-height: 110%;
+    color: #37474f;
+  }
+  input[type="text"],
+  input[type="password"],
+  input[type="email"] {
+    padding: 8px 12px;
+    font-size: 18px;
+    line-height: 110%;
+    color: #535261;
+    border-radius: 6px;
+    border: 1px solid rgba(0, 0, 0, 0.3);
+  }
+  .forget-password {
+    color: #e73f3f;
+    font-size: 14px;
+    line-height: 110%;
+  }
+}
+.mes__error {
+  color: #e73f3f;
+  font-size: 14px;
+  line-height: 110%;
+}

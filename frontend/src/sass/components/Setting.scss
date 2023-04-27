@@ -1,0 +1,25 @@
+.button-update {
+  font-family: Montserrat;
+  font-style: Medium;
+  font-size: 14px;
+  line-height: 22px;
+  line-height: 129%;
+  color: #ff993c;
+}
+.form-setting {
+  img {
+    width: 5px;
+    transform: translateX(0);
+  }
+  .option {
+    > img {
+      width: 23px;
+      transform: translateX(-32px);
+      height: 21px;
+    }
+  }
+}
+.select-css {
+  background: transparent;
+  width: 176px;
+}

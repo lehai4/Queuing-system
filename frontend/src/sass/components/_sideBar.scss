@@ -1,0 +1,17 @@
+// Icon sidebar
+.icon-sidebar {
+  font-size: 20px;
+}
+.text-white > span > img {
+  filter: brightness(0) invert(0);
+  -webkit-filter: brightness(0) invert(1);
+}
+.package {
+  span {
+    letter-spacing: 2px;
+  }
+}
+button > img {
+  position: absolute;
+  left: 12px;
+}

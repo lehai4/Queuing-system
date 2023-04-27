@@ -1,0 +1,44 @@
+.w-50-override {
+  max-width: 200px;
+  width: 200px;
+}
+@media (min-width: 768px) {
+  .md\:ml-50 {
+    margin-left: 12.5rem;
+  }
+}
+.mt-24 {
+  margin-top: 0;
+}
+.bg-main-grey {
+  background-color: #f9f6f4;
+}
+.mt-24-override {
+  margin-top: 50px;
+}
+.pt-15-override,
+.pb-15-override {
+  padding-top: 15px;
+  padding-bottom: 15px;
+}
+.pl-27-override {
+  margin-left: 27px;
+}
+
+.capitalize {
+  font-style: bold;
+  font-size: 16px;
+  line-height: 26px;
+  line-height: 110%;
+  font-weight: 500;
+  text-transform: none;
+}
+
+// .e-date-wrapper:not(.e-filled) .e-date-icon.e-icons {
+//   background-position: center;
+//   max-width: 100%;
+//   padding-right: 5px;
+//   height: 20px;
+//   width: 20px;
+//   background: url(../../assets//icon/u_calender.png) no-repeat;
+// }
