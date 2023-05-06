@@ -27,9 +27,9 @@ const authController = {
 
       //Save user to DB
       const user = await newUser.save();
-      res.status(200).json(user);
+      return res.status(200).json(user);
     } catch (err) {
-      res.status(500).json(err);
+      return res.status(500).json(err);
     }
   },
 
@@ -41,7 +41,7 @@ const authController = {
         admin: user.admin,
       },
       `${process.env.JWT_ACCESS_KEY}`,
-      { expiresIn: "20s" }
+      { expiresIn: "365d" }
     );
   },
 
@@ -60,7 +60,7 @@ const authController = {
     try {
       const user = await User.findOne({ username: req.body.username });
       if (!user) {
-        res.status(404).json("Incorrect username");
+        return res.status(404).json("Incorrect username");
       }
       // const validPassword = await bcrypt.compare(
       //   req.body.password,
@@ -68,7 +68,7 @@ const authController = {
       // );
       const validPassword = await User.findOne({ password: req.body.password });
       if (!validPassword) {
-        res.status(404).json("Incorrect password");
+        return res.status(404).json("Incorrect password");
       }
       if (user && validPassword) {
         const accessToken = authController.generateAccessToken(user);
@@ -82,10 +82,10 @@ const authController = {
           sameSite: "strict",
         });
         // const { password, ...others } = user._doc;
-        res.status(200).json({ user, accessToken });
+        return res.status(200).json({ user, accessToken });
       }
     } catch (err) {
-      res.status(500).json(err);
+      return res.status(500).json(err);
     }
   },
   requestRefreshToken: async (req, res) => {
@@ -120,7 +120,7 @@ const authController = {
     refreshTokens = refreshTokens.filter(
       (token) => token !== req.cookies.refreshToken
     );
-    res.status(200).json("Logged out successfully!");
+    return res.status(200).json("Logged out successfully!");
   },
 };
 module.exports = authController;

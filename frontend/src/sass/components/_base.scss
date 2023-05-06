@@ -20,7 +20,8 @@ a {
 :focus {
   outline: 0;
 }
-input {
+input,
+select {
   outline: none;
 }
 img {

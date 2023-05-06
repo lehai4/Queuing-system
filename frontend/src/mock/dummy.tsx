@@ -46,28 +46,36 @@ export const links = [
   },
 ];
 type gridActiveAplianceProps = {
-  statusActive: number;
+  statusActive: string;
 };
 export const gridActiveApliance = (props: gridActiveAplianceProps) => (
   <>
-    {props.statusActive === 1 ? (
-      <div className="status status--active inline-flex">
-        <img src={`${active}`} alt="" />
+    {props.statusActive === "Hoạt động" ? (
+      <div className="status status--active inline-flex items-center">
+        <img
+          src={`${active}`}
+          alt=""
+          style={{ borderRadius: "50%", height: "fit-content" }}
+        />
         <button
           type="button"
-          className="button-active capitalize rounded-2xl text-md"
+          className="ml-2 button-active capitalize rounded-2xl text-md"
         >
-          Hoạt động
+          {props.statusActive}
         </button>
       </div>
-    ) : props.statusActive === 0 ? (
-      <div className="status status--disable inline-flex">
-        <img src={`${disabled}`} alt="" />
+    ) : props.statusActive === "Ngưng hoạt động" ? (
+      <div className="status status--disable inline-flex items-center">
+        <img
+          src={`${disabled}`}
+          alt=""
+          style={{ borderRadius: "50%", height: "fit-content" }}
+        />
         <button
           type="button"
-          className="button-disable capitalize rounded-2xl text-md"
+          className="ml-2 button-disable capitalize rounded-2xl text-md"
         >
-          Ngừng hoạt động
+          {props.statusActive}
         </button>
       </div>
     ) : (
@@ -76,28 +84,36 @@ export const gridActiveApliance = (props: gridActiveAplianceProps) => (
   </>
 );
 type gridConnectAplianceProps = {
-  statusConnect: number;
+  statusConnect: string;
 };
 export const gridConnectApliance = (props: gridConnectAplianceProps) => (
   <>
-    {props.statusConnect === 1 ? (
-      <div className="status status--connect inline-flex">
-        <img src={`${active}`} alt="" />
+    {props.statusConnect === "Kết nối" ? (
+      <div className="status status--connect inline-flex items-center">
+        <img
+          src={`${active}`}
+          alt=""
+          style={{ borderRadius: "50%", height: "fit-content" }}
+        />
         <button
           type="button"
-          className="button-connect capitalize rounded-2xl text-md"
+          className="ml-2 button-connect capitalize rounded-2xl text-md"
         >
-          Kết nối
+          {props.statusConnect}
         </button>
       </div>
-    ) : props.statusConnect === 0 ? (
-      <div className="status status--disconnect inline-flex">
-        <img src={`${disabled}`} alt="" />
+    ) : props.statusConnect === "Mất kết nối" ? (
+      <div className="status status--disconnect inline-flex items-center">
+        <img
+          src={`${disabled}`}
+          alt=""
+          style={{ borderRadius: "50%", height: "fit-content" }}
+        />
         <button
           type="button"
-          className="button-disconnect capitalize rounded-2xl text-md"
+          className="ml-2 button-disconnect capitalize rounded-2xl text-md"
         >
-          Mất kết nối
+          {props.statusConnect}
         </button>
       </div>
     ) : (

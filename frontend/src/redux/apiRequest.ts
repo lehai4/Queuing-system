@@ -10,7 +10,14 @@ import {
   signInStart,
   signInSuccess,
 } from "./authSlice";
-import { getUsersFailure, getUsersStart, getUsersSuccess } from "./userSlice";
+import {
+  deleteUserFailure,
+  deleteUserStart,
+  deleteUserSuccess,
+  getUsersFailure,
+  getUsersStart,
+  getUsersSuccess,
+} from "./userSlice";
 export const signInUser = async (user: any, dispatch: any, navigate: any) => {
   dispatch(signInStart());
   try {
@@ -34,11 +41,11 @@ export const registerUser = async (user: any, dispatch: any, navigate: any) => {
     dispatch(registerFailure());
   }
 };
-export const getAllUsers = async (accesccToken: any, dispatch: any) => {
+export const getAllUsers = async (accesssToken: string, dispatch: any) => {
   dispatch(getUsersStart());
   try {
     const res: any = await axios.get(`http://localhost:3001/v1/user`, {
-      headers: { token: `Bearer ${accesccToken}` },
+      headers: { token: `Bearer ${accesssToken}` },
     });
     dispatch(getUsersSuccess(res.data));
   } catch (e) {
@@ -47,19 +54,37 @@ export const getAllUsers = async (accesccToken: any, dispatch: any) => {
 };
 export const logOut = async (
   dispatch: any,
-  id: any,
   navigate: any,
-  accesccToken: string,
-  axiosJWT: any
+  accesccToken: string
 ) => {
   dispatch(logOutStart());
   try {
-    await axiosJWT.post(`http://localhost:3001/v1/auth/logout`, id, {
-      headers: { token: `Bearer: ${accesccToken}` },
+    await axios.post(`http://localhost:3001/v1/auth/logout`, {
+      headers: { token: `Bearer ${accesccToken}` },
     });
     dispatch(logOutSuccess());
     navigate("/auth");
   } catch (e) {
     dispatch(logOutFailure());
+  }
+};
+
+export const deleteUser = async (
+  accesssToken: string,
+  dispatch: any,
+  id: string,
+  axiosJWT: any
+) => {
+  dispatch(deleteUserStart());
+  try {
+    const res: any = await axiosJWT.delete(
+      `http://localhost:3001/v1/user/${id}`,
+      {
+        headers: { token: `Bearer ${accesssToken}` },
+      }
+    );
+    dispatch(deleteUserSuccess(res.data));
+  } catch (err: any) {
+    dispatch(deleteUserFailure("Delete Failed"));
   }
 };

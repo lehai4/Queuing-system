@@ -1,27 +1,47 @@
-import { Authentication, NotFound } from "../components";
-import { Navigate } from "react-router-dom";
+import { Navigate, Route, Routes } from "react-router-dom";
 import {
-  Home,
+  Authentication,
+  ApplianceFormAdd,
+  ApplianceFormUpdate,
+  NotFound,
+} from "../components";
+import { useAppDispatch, useAppSelector } from "../hooks/hooks";
+import {
   Appliance,
-  Setting,
   GrantNumber,
-  Service,
+  Home,
   Report,
+  Service,
+  Setting,
 } from "../pages";
-import { Routes, Route } from "react-router-dom";
-import { useAppSelector } from "../hooks/hooks";
+import { ApplianceProp } from "../typeProps";
 export interface IRouterProps {}
 const Router: React.FunctionComponent<IRouterProps> = () => {
-  const user = useAppSelector((state) => state.auth.login.currentUser);
+  const datas = useAppSelector(
+    (state) => state.appliances.appliance.applianceArr
+  );
+  const getProductBySlug = (slug: string) => datas.find((e) => e.uId == slug);
+  const user = useAppSelector((state) => state.auth.login.currentUser?.user);
   return (
     <Routes>
       <Route path="/dashboard" element={<Home />} />
       <Route
         path="/"
-        element={!user ? <Navigate to="/auth" /> : <Navigate to="/dashboard" />}
+        element={
+          user === undefined ? (
+            <Navigate to="/auth" />
+          ) : (
+            <Navigate to="/dashboard" />
+          )
+        }
       />
       <Route path="/auth" element={<Authentication />} />
       <Route path="/auth/:slug" element={<Authentication />} />
+      <Route path="/thiet-bi/them-thiet-bi" element={<ApplianceFormAdd />} />
+      <Route
+        path="/thiet-bi/cap-nhat-thiet-bi/:slug"
+        element={<ApplianceFormUpdate getProductBySlug={getProductBySlug} />}
+      />
       <Route path="/thiet-bi" element={<Appliance />} />
       <Route path="/dich-vu" element={<Service />} />
       <Route path="/cap-so" element={<GrantNumber />} />

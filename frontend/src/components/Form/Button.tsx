@@ -18,9 +18,9 @@ const Button = ({
       type="submit"
       style={style}
       onClick={handleClick}
-      className={`flex align-center justify-center hover:drop-shadow-xl hover:bg-${bgHoverColor}`}
+      className={`flex flex-col items-center justify-center hover:drop-shadow-xl hover:bg-${bgHoverColor}`}
     >
-      {icon !== "" && <img src={icon} alt="" />}
+      {icon !== "" && <img className="md:mb-1" src={icon} alt="" />}
       {text}
     </button>
   );

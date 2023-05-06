@@ -1,18 +1,28 @@
-import { Link, NavLink } from "react-router-dom";
+import { Link, NavLink, useNavigate } from "react-router-dom";
 import iconLogOut from "../assets/icon/fi_log-out.png";
 import logo from "../assets/img/Logo_alta.png";
 import { Button, Wrapper } from "../components";
+import { useAppDispatch, useAppSelector } from "../hooks/hooks";
 import { links } from "../mock/dummy";
+import { logOut } from "../redux/apiRequest";
+
 const Sidebar = () => {
   const currentColor = "#FF7506";
   const activeMenu = true;
   const bgColor = "#FFF2E7";
+  const dispatch = useAppDispatch();
+  const navigate = useNavigate();
+  const currentUser = useAppSelector((state) => state.auth.login.currentUser);
 
-  const handleLogOut = () => {};
+  const handleLogOut = () => {
+    logOut(dispatch, navigate, currentUser?.accessToken ?? "");
+  };
+
   const activeLink =
-    "flex items-center mb-1 gap-3 pl-4 pb-15-override pt-15-override text-white  text-md";
+    "flex items-center mb-1 gap-3 pl-7 pb-15-override pt-15-override text-white  text-md";
   const normalLink =
-    "flex items-center mb-1 gap-3 pl-4 pb-15-override pt-15-override text-md text-gray-700 dark:text-gray-200 dark:hover:text-black hover:bg-light-gray";
+    "flex items-center mb-1 gap-3 pl-7 pb-15-override pt-15-override text-md text-gray-700 dark:text-gray-200 dark:hover:text-black hover:bg-light-gray";
+
   return (
     <Wrapper className="h-screen md:overflow-hidden overflow-auto md:hover:overflow-auto relative">
       {activeMenu && (
@@ -59,7 +69,9 @@ const Sidebar = () => {
               fontSize: 16,
               position: "absolute",
               bottom: 30,
+              gap: 12,
               left: "50%",
+              flexDirection: "row",
               transform: "translateX(-50%)",
               borderRadius: 8,
               border: `1px solid ${bgColor}`,

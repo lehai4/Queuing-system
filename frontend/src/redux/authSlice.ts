@@ -1,30 +1,47 @@
 import { createSlice } from "@reduxjs/toolkit";
-
 import type { PayloadAction } from "@reduxjs/toolkit";
+
+import {
+  PropLogin,
+  PropRegister,
+  PropLogOut,
+  currentUserProps,
+} from "../typeProps";
+const login: PropLogin = {
+  currentUser: null,
+  isFetching: false,
+  error: false,
+};
+
+const register: PropRegister = {
+  isFetching: false,
+  error: false,
+  success: false,
+};
+const logOut: PropLogOut = {
+  isFetching: false,
+  error: false,
+};
+type initialStateType = {
+  login: PropLogin;
+  register: PropRegister;
+  logOut: PropLogOut;
+};
+
+const initialState: initialStateType = {
+  login,
+  register,
+  logOut,
+};
 const authSlice = createSlice({
   name: "auth",
-  initialState: {
-    login: {
-      currentUser: null,
-      isFetching: false,
-      error: false,
-    },
-    register: {
-      isFetching: false,
-      error: false,
-      success: false,
-    },
-    logOut: {
-      isFetching: false,
-      error: false,
-    },
-  },
+  initialState: initialState,
   reducers: {
     // Login
     signInStart: (state) => {
       state.login.isFetching = true;
     },
-    signInSuccess: (state, action: PayloadAction<any>) => {
+    signInSuccess: (state, action: PayloadAction<currentUserProps>) => {
       state.login.isFetching = false;
       state.login.currentUser = action.payload;
       state.login.error = false;
@@ -49,16 +66,16 @@ const authSlice = createSlice({
     },
     // logout
     logOutStart: (state) => {
-      state.logOut.isFetching = true;
+      state.login.isFetching = true;
     },
     logOutSuccess: (state) => {
-      state.logOut.isFetching = true;
+      state.login.isFetching = false;
       state.login.currentUser = null;
-      state.logOut.error = false;
+      state.login.error = false;
     },
     logOutFailure: (state) => {
-      state.logOut.isFetching = false;
-      state.logOut.error = true;
+      state.login.isFetching = false;
+      state.login.error = true;
     },
   },
 });

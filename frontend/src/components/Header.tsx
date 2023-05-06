@@ -6,7 +6,7 @@ export type HeaderProps = {
 };
 const Header = ({ title, style }: HeaderProps) => {
   return (
-    <Wrapper className="mb-6 mt-3">
+    <Wrapper className="mb-3 mt-3">
       <p style={style} className="text-3xl tracking-tight text-slate-900">
         {title}
       </p>
