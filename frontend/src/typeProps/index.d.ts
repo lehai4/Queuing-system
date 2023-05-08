@@ -36,6 +36,7 @@ export interface UsersProp {
 }
 export interface ApplianceProp {
   uId: string;
+  id: number;
   nameAppliance: string;
   addressIP: string;
   statusActive: string;

@@ -6,33 +6,33 @@ import { toast } from "react-toastify";
 import * as Yup from "yup";
 import { Button, Header, Helmet, Input, Navbar, Selected, Wrapper } from "..";
 import app from "../../database/firebaseConfig";
-import { useAppDispatch, useAppSelector } from "../../hooks/hooks";
+import { useAppSelector } from "../../hooks/hooks";
 import { ApplianceProp } from "../../typeProps";
 import User from "../User";
-let initialValues: ApplianceProp = {
-  uId: "",
-  nameAppliance: "",
-  addressIP: "",
-  statusActive: "Hoạt động",
-  statusConnect: "Kết nối",
-  typeAppliance: "",
-  nameSignIn: "",
-  passSignIn: "",
-  useService: "",
-};
+
 const ApplianceFormAdd = () => {
   const navigate = useNavigate();
   const dbRef = ref(getDatabase(app));
-  const dispatch = useAppDispatch();
   const data = useAppSelector(
     (state) => state.appliances.appliance.applianceArr
   );
   const [applianceOriginal, setApplianceOriginal] = useState<ApplianceProp[]>(
     []
   );
-
-  const handleWriteDatabase = (id: number, data: ApplianceProp) => {
-    set(child(dbRef, `appliance/` + id), data)
+  let initialValues: ApplianceProp = {
+    id: data.length + 1,
+    uId: "",
+    nameAppliance: "",
+    addressIP: "",
+    statusActive: "Hoạt động",
+    statusConnect: "Kết nối",
+    typeAppliance: "",
+    nameSignIn: "",
+    passSignIn: "",
+    useService: "",
+  };
+  const handleWriteDatabase = (data: ApplianceProp) => {
+    set(child(dbRef, `appliance/` + data.id), data)
       .then(() => {
         toast.success(`Data saved successfully`);
         navigate("/thiet-bi");
@@ -54,7 +54,7 @@ const ApplianceFormAdd = () => {
       passSignIn: Yup.string().required("required"),
     }),
     onSubmit: (e) => {
-      handleWriteDatabase(data.length + 1, e);
+      handleWriteDatabase(e);
     },
   });
 
@@ -83,7 +83,7 @@ const ApplianceFormAdd = () => {
         <Header
           title="Quản lý thiết bị"
           style={{
-            fontWeight: "745",
+            fontWeight: 600,
             fontSize: 24,
             color: "#FF7506",
             lineHeight: "110%",
@@ -97,7 +97,7 @@ const ApplianceFormAdd = () => {
             <Header
               title="Thông tin thiết bị"
               style={{
-                fontWeight: "745",
+                fontWeight: 700,
                 fontSize: 20,
                 color: "#FF7506",
                 lineHeight: "110%",
@@ -172,6 +172,7 @@ const ApplianceFormAdd = () => {
                   <Selected
                     name="typeAppliance"
                     placeholder="Chọn loại thiết bị"
+                    multi={false}
                     handleChange={formik.handleChange}
                     value={formik.values.typeAppliance}
                     options={applianceOriginal

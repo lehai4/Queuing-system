@@ -6,6 +6,7 @@ export { default as Checkbox } from "./Form/Checkbox";
 export { default as Authentication } from "./Authentication/Authentication";
 export { default as ApplianceFormAdd } from "./Appliance/ApplianeFormAdd";
 export { default as ApplianceFormUpdate } from "./Appliance/ApplianceFormUpdate";
+export { default as ApplianceDetail } from "./Appliance/ApplianceDetail";
 export { default as AuthForm } from "./Authentication/AuthForm";
 export { default as SignIn } from "./Authentication/SignIn/SignIn";
 export { default as ConfirmEmail } from "./Authentication/ConfirmEmail/ConfirmEmail";

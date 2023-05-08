@@ -3,7 +3,6 @@ import DataTable, { TableColumn } from "react-data-table-component";
 import { useNavigate } from "react-router-dom";
 import plus from "../assets/icon/add-square.png";
 import {
-  ApplianceFormUpdate,
   Button,
   Header,
   Helmet,
@@ -79,9 +78,12 @@ const Appliance = () => {
       width: "300px",
     },
     {
-      cell: () => (
+      cell: (row) => (
         <div className="flex align-center">
-          <button className="btn btn-detail underline capitalize rounded-2xl text-md">
+          <button
+            className="btn btn-detail underline capitalize rounded-2xl text-md"
+            onClick={() => handleShowPageDetail(row)}
+          >
             Chi tiết
           </button>
         </div>
@@ -120,7 +122,9 @@ const Appliance = () => {
   const handleSeeMore = (service: string) => {
     console.log(service);
   };
-
+  const handleShowPageDetail = (data: ApplianceProp) => {
+    navigate(`/thiet-bi/chi-tiet/${data.uId}`);
+  };
   const handleShowPageUpdate = (data: ApplianceProp) => {
     navigate(`/thiet-bi/cap-nhat-thiet-bi/${data.uId}`);
   };
@@ -223,7 +227,7 @@ const Appliance = () => {
               data={appliance}
               pagination
               responsive
-              paginationPerPage={5}
+              paginationPerPage={10}
               paginationRowsPerPageOptions={[5, 10, 15, 20]}
               paginationComponentOptions={paginationComponentOptions}
             />

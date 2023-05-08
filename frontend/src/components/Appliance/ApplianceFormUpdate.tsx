@@ -1,12 +1,13 @@
-import { child, getDatabase, ref, set } from "firebase/database";
+import { getDatabase, ref, update } from "firebase/database";
 import { useFormik } from "formik";
 import { useEffect, useState } from "react";
 import { useNavigate, useParams } from "react-router-dom";
-import { toast } from "react-toastify";
 import * as Yup from "yup";
+import { toast } from "react-toastify";
+
 import { Button, Header, Helmet, Input, Navbar, Selected, Wrapper } from "..";
 import app from "../../database/firebaseConfig";
-import { useAppDispatch, useAppSelector } from "../../hooks/hooks";
+import { useAppSelector } from "../../hooks/hooks";
 import { ApplianceProp } from "../../typeProps";
 import User from "../User";
 
@@ -23,9 +24,8 @@ const ApplianceFormUpdate = (props: PropsApplianceFormUpdate) => {
     []
   );
   const navigate = useNavigate();
-  const dbRef = ref(getDatabase(app));
-  const dispatch = useAppDispatch();
   let initData: ApplianceProp = {
+    id: 0,
     uId: "",
     nameAppliance: "",
     addressIP: "",
@@ -37,19 +37,32 @@ const ApplianceFormUpdate = (props: PropsApplianceFormUpdate) => {
     useService: "",
   };
   let initialValues = { ...initData, ...data };
-  console.log(initialValues);
+  const handleUpdateDb = (data: ApplianceProp) => {
+    const db = getDatabase(app);
+    // Write the new post's data simultaneously in the posts list and the user's post list.
+    const updates: any = {};
+    updates["/appliance/" + data.id] = data;
 
-  //   const handleWriteDatabase = (id: number, data: ApplianceProp) => {
-  //     set(child(dbRef, `appliance/` + id), data)
-  //       .then(() => {
-  //         toast.success(`Data saved successfully`);
-  //         navigate("/thiet-bi");
-  //       })
-  //       .catch((error) => {
-  //         toast.error("The write failed", error);
-  //       });
-  //   };
-
+    return update(ref(db), updates);
+  };
+  const handleCompared = (data1: ApplianceProp, data2: ApplianceProp) => {
+    if (
+      data1.id === data2?.id &&
+      data1.uId === data2?.uId &&
+      data1.nameAppliance === data2?.nameAppliance &&
+      data1.addressIP === data2?.addressIP &&
+      data1.statusConnect === data2?.statusConnect &&
+      data1.statusActive === data2?.statusActive &&
+      data1.typeAppliance === data2?.typeAppliance &&
+      data1.nameSignIn === data2?.nameSignIn &&
+      data1.passSignIn === data2?.passSignIn &&
+      data1.useService === data2?.useService
+    ) {
+      return true;
+    } else {
+      return false;
+    }
+  };
   const formik = useFormik({
     initialValues,
     validationSchema: Yup.object({
@@ -62,10 +75,15 @@ const ApplianceFormUpdate = (props: PropsApplianceFormUpdate) => {
       passSignIn: Yup.string().required("required"),
     }),
     onSubmit: (e) => {
-      console.log(e);
+      if (handleCompared(e, initialValues)) {
+        toast.error("data has not changed!");
+      } else {
+        handleUpdateDb(e);
+        toast.success("update successfully!");
+        navigate("/thiet-bi");
+      }
     },
   });
-
   const handleCancel = () => {
     navigate(-1);
   };
@@ -86,11 +104,11 @@ const ApplianceFormUpdate = (props: PropsApplianceFormUpdate) => {
           showRedirection="Cập nhật thiết bị"
         />
       </Wrapper>
-      <Helmet title="Thêm thiết bị">
+      <Helmet title="Cập nhật thiết bị">
         <Header
           title="Quản lý thiết bị"
           style={{
-            fontWeight: "745",
+            fontWeight: 600,
             fontSize: 24,
             color: "#FF7506",
             lineHeight: "110%",
@@ -104,7 +122,7 @@ const ApplianceFormUpdate = (props: PropsApplianceFormUpdate) => {
             <Header
               title="Thông tin thiết bị"
               style={{
-                fontWeight: "745",
+                fontWeight: 700,
                 fontSize: 20,
                 color: "#FF7506",
                 lineHeight: "110%",
@@ -178,6 +196,7 @@ const ApplianceFormUpdate = (props: PropsApplianceFormUpdate) => {
                   </Wrapper>
                   <Selected
                     name="typeAppliance"
+                    multi={false}
                     placeholder="Chọn loại thiết bị"
                     handleChange={formik.handleChange}
                     value={formik.values.typeAppliance}
@@ -244,13 +263,16 @@ const ApplianceFormUpdate = (props: PropsApplianceFormUpdate) => {
                 <label htmlFor="">Dịch vụ sử dụng:</label>
                 <span className="star ml-1">*</span>
               </Wrapper>
-              <Input
-                typeInput="text"
-                id="useService"
+              <Selected
+                placeholder=""
+                multi={true}
+                options={initialValues.useService?.split(", ").map((item) => {
+                  return {
+                    label: item,
+                    value: item,
+                  };
+                })}
                 name="useService"
-                placeholder="Nhập dịch vụ sử dụng"
-                className="mt-2 mb-3"
-                width={1520}
                 value={formik.values.useService}
                 handleChange={formik.handleChange}
               />
@@ -274,9 +296,9 @@ const ApplianceFormUpdate = (props: PropsApplianceFormUpdate) => {
               fontSize: 16,
               color: "#FF9138",
               backgroundColor: "#FFF2E7",
-              padding: "13px 45px",
+              padding: "13px 30px",
               fontWeight: 700,
-              maxWidth: 148,
+              maxWidth: 116,
               border: "1px solid #FF9138",
               borderRadius: 8,
             }}
@@ -284,7 +306,7 @@ const ApplianceFormUpdate = (props: PropsApplianceFormUpdate) => {
             handleClick={handleCancel}
           />
           <Button
-            text="Thêm thiết bị"
+            text="Cập nhật"
             bgHoverColor=""
             style={{
               fontSize: 16,
@@ -294,7 +316,7 @@ const ApplianceFormUpdate = (props: PropsApplianceFormUpdate) => {
               fontWeight: 700,
               border: "1px solid #FF9138",
               borderRadius: 8,
-              maxWidth: 148,
+              maxWidth: 115,
             }}
             icon=""
             handleClick={() => {}}

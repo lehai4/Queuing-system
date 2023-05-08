@@ -3,9 +3,10 @@ import {
   Authentication,
   ApplianceFormAdd,
   ApplianceFormUpdate,
+  ApplianceDetail,
   NotFound,
 } from "../components";
-import { useAppDispatch, useAppSelector } from "../hooks/hooks";
+import { useAppSelector } from "../hooks/hooks";
 import {
   Appliance,
   GrantNumber,
@@ -41,6 +42,10 @@ const Router: React.FunctionComponent<IRouterProps> = () => {
       <Route
         path="/thiet-bi/cap-nhat-thiet-bi/:slug"
         element={<ApplianceFormUpdate getProductBySlug={getProductBySlug} />}
+      />
+      <Route
+        path="/thiet-bi/chi-tiet/:slug"
+        element={<ApplianceDetail getProductBySlug={getProductBySlug} />}
       />
       <Route path="/thiet-bi" element={<Appliance />} />
       <Route path="/dich-vu" element={<Service />} />
