@@ -35,7 +35,7 @@ const Selector = (props: SelectorProps) => {
         <img src={`${arrow}`} alt="" className={`${open && "rotate-180"}`} />
       </div>
       <ul
-        className={`absolute w-full z-10 bg-white border border-solid border-zinc-300 overflow-y-auto  ${
+        className={`absolute w-full z-20 bg-white border border-solid border-zinc-300 overflow-y-auto  ${
           open ? "block" : "hidden"
         }`}
       >

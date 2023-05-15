@@ -29,7 +29,7 @@ const Service = () => {
   const grantNumbers = useAppSelector(
     (state) => state.grantNumbers.grantNumber.grantArr
   );
-  const [startDate, setStartDate] = useState<Date | undefined | any>();
+  const [startDate, setStartDate] = useState<Date | undefined>();
   const [endDate, setEndDate] = useState<Date | undefined>();
   const [nameService, setNameService] = useState<string>("Tất cả");
   const [status, setStatus] = useState<string>("Tất cả");

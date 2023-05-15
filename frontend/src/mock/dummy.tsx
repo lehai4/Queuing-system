@@ -331,3 +331,73 @@ export const paginationComponentOptions = {
   selectAllRowsItem: true,
   selectAllRowsItemText: "ALL",
 };
+export const monthData = [
+  { name: "1", Total: 90000 },
+  { name: "2", Total: 75000 },
+  { name: "3", Total: 95000 },
+  { name: "4", Total: 100000 },
+  { name: "5", Total: 120000 },
+  { name: "6", Total: 150000 },
+  { name: "7", Total: 120000 },
+  { name: "8", Total: 130000 },
+  { name: "9", Total: 150000 },
+  { name: "10", Total: 120000 },
+  { name: "11", Total: 95000 },
+  { name: "12", Total: 87000 },
+];
+
+export const weekData = [
+  { name: "Tuần 1", Total: 12000 },
+  { name: "Tuần 2", Total: 10000 },
+  { name: "Tuần 3", Total: 13000 },
+  { name: "Tuần 4", Total: 14000 },
+];
+
+export const dateData = [
+  { name: "01", Total: 2000 },
+  { name: "02", Total: 2100 },
+  { name: "03", Total: 2200 },
+  { name: "04", Total: 2300 },
+  { name: "05", Total: 2200 },
+  { name: "06", Total: 2100 },
+  { name: "07", Total: 2300 },
+  { name: "08", Total: 2400 },
+  { name: "09", Total: 2300 },
+  { name: "10", Total: 2200 },
+  { name: "11", Total: 2000 },
+  { name: "12", Total: 2100 },
+  { name: "13", Total: 2200 },
+  { name: "14", Total: 2300 },
+  { name: "15", Total: 2200 },
+  { name: "16", Total: 2100 },
+  { name: "17", Total: 2300 },
+  { name: "18", Total: 2400 },
+  { name: "19", Total: 2300 },
+  { name: "20", Total: 2200 },
+  { name: "21", Total: 2000 },
+  { name: "22", Total: 2100 },
+  { name: "23", Total: 2200 },
+  { name: "24", Total: 2300 },
+  { name: "25", Total: 2200 },
+  { name: "26", Total: 2100 },
+  { name: "27", Total: 2300 },
+  { name: "28", Total: 2400 },
+  { name: "29", Total: 2300 },
+  { name: "30", Total: 2200 },
+  { name: "31", Total: 2200 },
+];
+export const data = {
+  day: {
+    name: dateData.map((date) => date.name),
+    arr: dateData.map((date) => date.Total),
+  },
+  week: {
+    name: weekData.map((date) => date.name),
+
+    arr: weekData.map((week) => week.Total),
+  },
+  month: {
+    name: monthData.map((date) => date.name),
+    arr: monthData.map((month) => month.Total),
+  },
+};
