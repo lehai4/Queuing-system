@@ -4,6 +4,7 @@ import { Link, useNavigate } from "react-router-dom";
 import * as Yup from "yup";
 import { signInUser } from "../../../redux/apiRequest";
 import { Button, Input, Wrapper } from "../../index";
+import * as authAction from "../../../redux/action/authAction";
 export interface initialize {
   username: string;
   password: string;

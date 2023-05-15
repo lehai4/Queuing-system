@@ -4,11 +4,19 @@ import { useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
 import { toast } from "react-toastify";
 import * as Yup from "yup";
-import { Button, Header, Helmet, Input, Navbar, Selected, Wrapper } from "..";
+import {
+  Button,
+  Header,
+  Helmet,
+  Input,
+  Navbar,
+  Selected,
+  Wrapper,
+  User,
+} from "..";
 import app from "../../database/firebaseConfig";
 import { useAppSelector } from "../../hooks/hooks";
 import { ApplianceProp } from "../../typeProps";
-import User from "../User";
 
 const ApplianceFormAdd = () => {
   const navigate = useNavigate();
@@ -74,6 +82,8 @@ const ApplianceFormAdd = () => {
         <Navbar
           title="Thiết bị"
           direct={true}
+          slug="them-thiet-bi"
+          path="thiet-bi"
           redirect={true}
           showDirection="Danh sách thiết bị"
           showRedirection="Thêm thiết bị"
@@ -89,7 +99,7 @@ const ApplianceFormAdd = () => {
             lineHeight: "110%",
           }}
         />
-        <Wrapper className="absolute top-1 right-5">
+        <Wrapper className="absolute top-1 right-11">
           <User />
         </Wrapper>
         <Wrapper className="md:m-14 md:mb-0 md:ml-0 mt-24 p-2 md:p-8 md:pb-12 md:pt-4 md:pl-6 bg-white rounded-3xl">

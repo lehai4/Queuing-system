@@ -68,7 +68,7 @@ const Sidebar = () => {
               padding: "12px 0px",
               fontSize: 16,
               position: "absolute",
-              bottom: 30,
+              bottom: 45,
               gap: 12,
               left: "50%",
               flexDirection: "row",

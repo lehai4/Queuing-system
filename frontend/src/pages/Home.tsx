@@ -1,53 +1,75 @@
-import { useEffect } from "react";
-import { Header, Wrapper, Helmet } from "../components";
-import { deleteUser, getAllUsers } from "../redux/apiRequest";
-import { useAppDispatch, useAppSelector } from "../hooks/hooks";
-import { signInSuccess } from "../redux/authSlice";
-import { createAxios } from "../components/Instance/createInstance";
+import { Box } from "@mui/material";
+import { Header, Helmet, Rectangle, User, Wrapper, Frame } from "../components";
+import MiniCalendar from "../components/Calender";
+import { item, items } from "../mock/dummy";
 
 const Home = () => {
-  const dispatch = useAppDispatch();
-  const currentUser = useAppSelector((state) => state.auth.login.currentUser);
-  const userList = useAppSelector((state) => state.users.users?.allUsers);
-  const message = useAppSelector((state) => state.users.users?.message);
-
-  let axiosJWT = createAxios(currentUser, dispatch, signInSuccess);
-  const handleDeleteUser = (id: string) => {
-    deleteUser(currentUser?.accessToken ?? "", dispatch, id, axiosJWT);
-  };
-
-  useEffect(() => {
-    getAllUsers(currentUser?.accessToken ?? "", dispatch);
-  }, []);
   return (
-    <Wrapper className="relative md:m-10 md:mb-0 md:ml-0 mt-24 p-2 md:p-8 md:pb-12 md:pt-4 md:pl-6 bg-grey rounded-3xl">
-      <Helmet title="Trang chủ">
-        <Wrapper className="grid grid-cols-3 gap-4">
-          <Wrapper className="col-span-2">
+    <Helmet title="Trang chủ">
+      <Wrapper className="grid grid-cols-3">
+        <Wrapper className="col-span-2">
+          <Wrapper className="md:mb-0 md:ml-0 mt-24 md:p-6 bg-main-grey rounded-3xl">
+            <Header
+              title="Dashboard"
+              style={{
+                fontWeight: 700,
+                fontSize: 20,
+                color: "#FF7506",
+                lineHeight: "110%",
+              }}
+            />
             <Header
               title="Biểu đồ cấp số"
               style={{
-                fontWeight: "700",
+                fontWeight: 700,
+                marginTop: 55,
                 fontSize: 24,
                 color: "#FF7506",
                 lineHeight: "110%",
               }}
             />
-          </Wrapper>
-          <Wrapper className="bg-white min-h-max">
-            <Header
-              title="Tổng quan"
-              style={{
-                fontWeight: "700",
-                fontSize: 24,
-                color: "#FF7506",
-                lineHeight: "110%",
-              }}
-            />
+            <Wrapper className="grid grid-cols-4 gap-4 md:mb-5 md:mt-5">
+              <Rectangle items={item} />
+            </Wrapper>
           </Wrapper>
         </Wrapper>
-      </Helmet>
-    </Wrapper>
+        <Wrapper className="col-span-1 relative bg-white min-h-screen">
+          <Wrapper className="md:mb-0 md:ml-0 mt-24 md:p-6 md:pt-0 rounded-3xl">
+            <Wrapper className="absolute top-1 left-2/4 -translate-x-2/4">
+              <User />
+            </Wrapper>
+            <Wrapper className="md:mt-28">
+              <Header
+                title="Tổng quan"
+                style={{
+                  fontWeight: 700,
+                  fontSize: 24,
+                  color: "#FF7506",
+                  lineHeight: "110%",
+                }}
+              />
+            </Wrapper>
+            <Wrapper className="md:mb-5 md:mt-5 w-full flex flex-col gap-y-4">
+              <Frame items={items} />
+            </Wrapper>
+            <Wrapper className="md:mb-5 md:mt-6 w-full flex flex-col gap-y-4">
+              <Box
+                sx={{
+                  width: 512,
+                  height: 400,
+                  backgroundColor: "#FFF",
+                  borderRadius: 3,
+                  padding: 4,
+                  boxShadow: "0 0px 25px -15px rgba(0, 0, 0, 0.3)",
+                }}
+              >
+                <MiniCalendar selectRange={false} />
+              </Box>
+            </Wrapper>
+          </Wrapper>
+        </Wrapper>
+      </Wrapper>
+    </Helmet>
   );
 };
 

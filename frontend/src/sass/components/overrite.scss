@@ -7,6 +7,33 @@
     margin-left: 12.5rem;
   }
 }
+.w-90 {
+  width: 22.5rem;
+}
+.w-97 {
+  width: 400px;
+}
+.gap-15 {
+  gap: 3.2rem;
+}
+.gap-16-override {
+  gap: 3.7rem;
+}
+.gap-17-override {
+  gap: 4.5rem;
+}
+.gap-18-override {
+  gap: 4.2rem;
+}
+.gap-20-override {
+  gap: 4.8rem;
+}
+.gap-30-override {
+  gap: 7.4rem;
+}
+.gap-21 {
+  gap: 5.2rem;
+}
 .mt-24 {
   margin-top: 0;
 }
@@ -99,11 +126,29 @@
   margin-top: 0 !important;
   margin-bottom: 0 !important;
 }
-// .e-date-wrapper:not(.e-filled) .e-date-icon.e-icons {
-//   background-position: center;
-//   max-width: 100%;
-//   padding-right: 5px;
-//   height: 20px;
-//   width: 20px;
-//   background: url(../../assets//icon/u_calender.png) no-repeat;
-// }
+// apexchart
+.apexcharts-datalabels-group {
+  transform: translateY(-28px) !important;
+  > text:first-child {
+    display: none;
+  }
+}
+// modal
+.ReactModal__Overlay {
+  background: rgba(0, 0, 0, 0.7) !important;
+}
+// DatePicker
+
+.react-datepicker__view-calendar-icon input {
+  height: 44px !important;
+  width: 160px !important;
+  border: 1px solid rgba(0, 0, 0, 0.1);
+  border-radius: 4px;
+}
+.react-datepicker__input-container .react-datepicker__calendar-icon {
+  padding: 0 !important;
+  top: 50%;
+  left: 5px;
+  transform: translateY(-50%);
+  // background: url(../../assets/icon/calendar.png) no-repeat;
+}

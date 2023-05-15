@@ -5,6 +5,7 @@ import {
   ApplianceFormUpdate,
   ApplianceDetail,
   NotFound,
+  GrantNumberNew,
 } from "../components";
 import { useAppSelector } from "../hooks/hooks";
 import {
@@ -16,13 +17,19 @@ import {
   Setting,
 } from "../pages";
 import { ApplianceProp } from "../typeProps";
+import GrantNumberDetail from "../components/GrantNumber/GrantNumberDetail";
 export interface IRouterProps {}
 const Router: React.FunctionComponent<IRouterProps> = () => {
   const datas = useAppSelector(
     (state) => state.appliances.appliance.applianceArr
   );
-  const getProductBySlug = (slug: string) => datas.find((e) => e.uId == slug);
+  const granNumber = useAppSelector(
+    (state) => state.grantNumbers.grantNumber.grantArr
+  );
   const user = useAppSelector((state) => state.auth.login.currentUser?.user);
+  const getProductBySlug = (slug: string) => datas.find((e) => e.uId == slug);
+  const getGrantNumberBySlug = (slug: string) =>
+    granNumber.find((e) => e.stt == slug);
   return (
     <Routes>
       <Route path="/dashboard" element={<Home />} />
@@ -49,6 +56,13 @@ const Router: React.FunctionComponent<IRouterProps> = () => {
       />
       <Route path="/thiet-bi" element={<Appliance />} />
       <Route path="/dich-vu" element={<Service />} />
+      <Route path="/cap-so/cap-so-moi" element={<GrantNumberNew />} />
+      <Route
+        path="/cap-so/chi-tiet/:slug"
+        element={
+          <GrantNumberDetail getGrantNumberBySlug={getGrantNumberBySlug} />
+        }
+      />
       <Route path="/cap-so" element={<GrantNumber />} />
       <Route path="/bao-cao" element={<Report />} />
       <Route path="/cai-dat" element={<Setting />} />

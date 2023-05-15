@@ -46,3 +46,14 @@ export interface ApplianceProp {
   passSignIn: string;
   useService: string;
 }
+export interface GrantNumberInterface {
+  stt: string;
+  name: string;
+  nameService: string;
+  timeGrant: Date;
+  expireUse: Date;
+  status: number;
+  sourceProvider: string;
+  phone: string;
+  email: email;
+}

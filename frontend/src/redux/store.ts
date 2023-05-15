@@ -2,6 +2,7 @@ import { combineReducers, configureStore } from "@reduxjs/toolkit";
 import authReducer from "./authSlice";
 import userReducer from "./userSlice";
 import applianceReducer from "./applianceSlice";
+import grantNumberReducer from "./grantNumberSlice";
 import {
   persistStore,
   persistReducer,
@@ -23,6 +24,7 @@ const rootReducer = combineReducers({
   auth: authReducer,
   users: userReducer,
   appliances: applianceReducer,
+  grantNumbers: grantNumberReducer,
 });
 const persistedReducer = persistReducer(persistConfig, rootReducer);
 const store = configureStore({

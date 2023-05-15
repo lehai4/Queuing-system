@@ -1,7 +1,6 @@
 import { useNavigate, useParams } from "react-router-dom";
-import { Button, Header, Helmet, Navbar, Wrapper } from "..";
+import { Button, Header, Helmet, Navbar, Wrapper, User } from "..";
 import { ApplianceProp } from "../../typeProps";
-import User from "../User";
 
 type PropsApplianceDetail = {
   getProductBySlug: (value: string) => ApplianceProp | undefined;
@@ -20,6 +19,8 @@ const ApplianceDetail = (props: PropsApplianceDetail) => {
           title="Thiết bị"
           direct={true}
           redirect={true}
+          path="thiet-bi"
+          slug={slug}
           showDirection="Danh sách thiết bị"
           showRedirection="Chi tiết thiết bị"
         />
@@ -34,7 +35,7 @@ const ApplianceDetail = (props: PropsApplianceDetail) => {
             lineHeight: "110%",
           }}
         />
-        <Wrapper className="absolute top-1 right-5">
+        <Wrapper className="absolute top-1 right-11">
           <User />
         </Wrapper>
         <Wrapper className="flex flex-row md:mt-5 gap-7">

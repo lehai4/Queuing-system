@@ -7,7 +7,7 @@ type SelectorProps = {
   setValue: (value: string) => void;
 };
 const Selector = (props: SelectorProps) => {
-  const [selected, setSelected] = useState<string>("");
+  const [selected, setSelected] = useState<string>(props.optionComon);
   const [open, setOpen] = useState(false);
   const newArr = props.optionComon;
   const currentArr = props.isShowCommon

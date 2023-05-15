@@ -2,6 +2,8 @@ import { useEffect, useState } from "react";
 import DataTable, { TableColumn } from "react-data-table-component";
 import { useNavigate } from "react-router-dom";
 import plus from "../assets/icon/add-square.png";
+import { paginationComponentOptions } from "../mock/dummy";
+
 import {
   Button,
   Header,
@@ -11,18 +13,13 @@ import {
   Selector,
   Wrapper,
 } from "../components";
+import ModalViewMore from "../components/Modal/ModalViewMore";
 import User from "../components/User";
 import { useAppDispatch, useAppSelector } from "../hooks/hooks";
 import { gridActiveApliance, gridConnectApliance } from "../mock/dummy";
 import { fetchAppliance } from "../redux/applianceSlice";
 import { ApplianceProp } from "../typeProps";
 
-const paginationComponentOptions = {
-  rowsPerPageText: "Page Number",
-  rangeSeparatorText: "page",
-  selectAllRowsItem: true,
-  selectAllRowsItemText: "ALL",
-};
 const Appliance = () => {
   const data = useAppSelector(
     (state) => state.appliances.appliance.applianceArr
@@ -51,24 +48,24 @@ const Appliance = () => {
     },
     {
       name: "Trạng thái hoạt động",
-      cell: (row, index, column, id) => gridActiveApliance(row),
+      cell: (row) => gridActiveApliance(row),
       allowOverflow: false,
       width: "220px",
     },
     {
       name: "Trạng thái kết nối",
-      cell: (row, index, column, id) => gridConnectApliance(row),
+      cell: (row) => gridConnectApliance(row),
       allowOverflow: false,
       width: "220px",
     },
     {
       name: "Dịch vụ sử dụng",
-      cell: (row, index, column, id) => (
+      cell: (row, index) => (
         <div className="flex flex-col items-start">
           <span className="service">{row.useService}</span>
           <button
             className="underline btn btn-additional"
-            onClick={() => handleSeeMore(row.useService)}
+            onClick={() => handleSeeMore(row.useService, index)}
           >
             Xem thêm
           </button>
@@ -114,13 +111,20 @@ const Appliance = () => {
   ];
   const [active, setActive] = useState<string>("Tất cả");
   const [connected, setConnected] = useState<string>("Tất cả");
+  const [toggle, setToggle] = useState<boolean>(false);
+  const [service, setService] = useState<string>("");
   const [searchInput, setSearchInput] = useState<string>("");
   const [appliance, setAppliance] = useState<ApplianceProp[]>([]);
   const [applianceOriginal, setApplianceOriginal] = useState<ApplianceProp[]>(
     []
   );
-  const handleSeeMore = (service: string) => {
-    console.log(service);
+  const handleSeeMore = (service: string, index: number) => {
+    setToggle(true);
+    setService(service);
+  };
+
+  const closeModal = () => {
+    setToggle(false);
   };
   const handleShowPageDetail = (data: ApplianceProp) => {
     navigate(`/thiet-bi/chi-tiet/${data.uId}`);
@@ -166,8 +170,10 @@ const Appliance = () => {
           title="Thiết bị"
           direct={true}
           redirect={false}
-          showDirection="Danh sách thiết bị"
+          path="thiet-bi"
+          slug="/"
           showRedirection=""
+          showDirection="Danh sách thiết bị"
         />
       </div>
       <Helmet title="Thiết bị">
@@ -180,7 +186,7 @@ const Appliance = () => {
             lineHeight: "110%",
           }}
         />
-        <Wrapper className="absolute top-1 right-5">
+        <Wrapper className="absolute top-1 right-11">
           <User />
         </Wrapper>
         <Wrapper className="flex flex-row filter-option justify-between md:mr-28 md:mb-4 md:mt-5">
@@ -249,6 +255,13 @@ const Appliance = () => {
             bgHoverColor=""
           />
         </Wrapper>
+        {toggle && (
+          <ModalViewMore
+            toggle={toggle}
+            service={service}
+            closeModal={closeModal}
+          />
+        )}
       </Helmet>
     </Wrapper>
   );
