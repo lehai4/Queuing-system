@@ -1,5 +1,7 @@
+import moment from "moment";
 import { useEffect, useState } from "react";
 import DataTable, { TableColumn } from "react-data-table-component";
+import { Link } from "react-router-dom";
 import plus from "../assets/icon/add-square.png";
 import {
   Button,
@@ -12,12 +14,10 @@ import {
   Wrapper,
 } from "../components";
 import User from "../components/User";
-import { GrantNumberInterface } from "../typeProps";
-import moment from "moment";
-import { Link } from "react-router-dom";
 import { useAppDispatch, useAppSelector } from "../hooks/hooks";
 import { paginationComponentOptions, statusGrant } from "../mock/dummy";
 import { fetchGrantNumber } from "../redux/grantNumberSlice";
+import { GrantNumberInterface } from "../typeProps";
 import { formatTimeStamp } from "../utils/formatTimeStamp";
 
 const timesGrant = (data: any) => {

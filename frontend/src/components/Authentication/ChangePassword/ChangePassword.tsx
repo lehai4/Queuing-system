@@ -1,8 +1,8 @@
-import { useNavigate } from "react-router-dom";
-import { Button, Input, Wrapper } from "../../index";
 import { useFormik } from "formik";
-import * as Yup from "yup";
+import { useNavigate } from "react-router-dom";
 import { toast } from "react-toastify";
+import * as Yup from "yup";
+import { Button, Input, Wrapper } from "../../index";
 export interface initialize {
   password: string;
   confirmPassword: string;

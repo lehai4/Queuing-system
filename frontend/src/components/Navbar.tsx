@@ -1,4 +1,4 @@
-import { Wrapper, Header, Direction } from ".";
+import { Direction, Header, Wrapper } from ".";
 
 type NavProps = {
   title: string;

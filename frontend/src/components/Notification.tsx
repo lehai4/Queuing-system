@@ -1,7 +1,7 @@
 import { Box } from "@mui/material";
+import moment from "moment";
 import { Header, Wrapper } from "../components";
 import { notifiItem } from "../mock/dummy";
-import moment from "moment";
 const formatTimeStamp = (value: any) => {
   var hours = value.getHours();
   var minutes = value.getMinutes();

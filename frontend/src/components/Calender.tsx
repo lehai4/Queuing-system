@@ -1,7 +1,7 @@
+import { SvgIcon } from "@mui/material";
 import Calendar from "react-calendar";
 import "react-calendar/dist/Calendar.css";
 import { MdChevronLeft, MdChevronRight } from "react-icons/md";
-import { SvgIcon } from "@mui/material";
 type MiniCalendarProps = {
   selectedDate: Date;
   selectRange: boolean;

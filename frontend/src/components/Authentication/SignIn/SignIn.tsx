@@ -4,7 +4,6 @@ import { Link, useNavigate } from "react-router-dom";
 import * as Yup from "yup";
 import { signInUser } from "../../../redux/apiRequest";
 import { Button, Input, Wrapper } from "../../index";
-import * as authAction from "../../../redux/action/authAction";
 export interface initialize {
   username: string;
   password: string;
@@ -31,6 +30,7 @@ const SignIn = () => {
       signInUser(e, dispatch, navigate);
     },
   });
+
   return (
     <form onSubmit={formik.handleSubmit} className="form__group m-12 p-12">
       <Wrapper className="form__group-user flex flex-col">

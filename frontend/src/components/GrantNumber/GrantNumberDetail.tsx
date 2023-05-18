@@ -1,9 +1,9 @@
 import { useNavigate, useParams } from "react-router-dom";
 import { Button, Header, Helmet, Navbar, User, Wrapper } from "..";
-import { GrantNumberInterface } from "../../typeProps";
-import { formatTimeStamp } from "../../utils/formatTimeStamp";
 import back from "../../assets/icon/back-square.png";
 import { statusGrant } from "../../mock/dummy";
+import { GrantNumberInterface } from "../../typeProps";
+import { formatTimeStamp } from "../../utils/formatTimeStamp";
 
 type PropsGrantNumberDetail = {
   getGrantNumberBySlug: (value: string) => GrantNumberInterface | undefined;

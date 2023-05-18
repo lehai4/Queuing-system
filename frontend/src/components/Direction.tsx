@@ -1,6 +1,6 @@
-import Wrapper from "./Wrapper";
-import arrow from "../assets/icon/u_angle-right.png";
 import { Link } from "react-router-dom";
+import arrow from "../assets/icon/u_angle-right.png";
+import Wrapper from "./Wrapper";
 type DirectionProps = {
   direction: string;
   slug: string | undefined;

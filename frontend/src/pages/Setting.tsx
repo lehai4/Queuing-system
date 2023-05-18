@@ -1,4 +1,4 @@
-import { Header, Helmet, Wrapper, User, Navbar } from "../components";
+import { Header, Helmet, Navbar, User, Wrapper } from "../components";
 const Setting = () => {
   return (
     <Wrapper className="md:mb-0 md:ml-0 mt-24 md:pb-6 md:pt-4 md:pl-6 bg-main-grey rounded-3xl">

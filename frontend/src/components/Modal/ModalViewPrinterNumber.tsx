@@ -1,8 +1,8 @@
-import Modal from "react-modal";
-import Wrapper from "../Wrapper";
-import { formatTimeStamp } from "../../utils/formatTimeStamp";
-import { MdClose } from "react-icons/md";
 import { SvgIcon } from "@mui/material";
+import { MdClose } from "react-icons/md";
+import Modal from "react-modal";
+import { formatTimeStamp } from "../../utils/formatTimeStamp";
+import Wrapper from "../Wrapper";
 type ModalViewPrinterNumberProps = {
   toggle: boolean;
   service: string;

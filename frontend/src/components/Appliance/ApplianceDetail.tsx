@@ -1,5 +1,5 @@
 import { useNavigate, useParams } from "react-router-dom";
-import { Button, Header, Helmet, Navbar, Wrapper, User } from "..";
+import { Button, Header, Helmet, Navbar, User, Wrapper } from "..";
 import { ApplianceProp } from "../../typeProps";
 
 type PropsApplianceDetail = {

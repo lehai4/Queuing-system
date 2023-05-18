@@ -11,8 +11,8 @@ import {
   Input,
   Navbar,
   Selected,
-  Wrapper,
   User,
+  Wrapper,
 } from "..";
 import app from "../../database/firebaseConfig";
 import { useAppSelector } from "../../hooks/hooks";

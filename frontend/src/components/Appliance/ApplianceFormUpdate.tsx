@@ -2,8 +2,8 @@ import { getDatabase, ref, update } from "firebase/database";
 import { useFormik } from "formik";
 import { useEffect, useState } from "react";
 import { useNavigate, useParams } from "react-router-dom";
-import * as Yup from "yup";
 import { toast } from "react-toastify";
+import * as Yup from "yup";
 
 import {
   Button,
@@ -12,8 +12,8 @@ import {
   Input,
   Navbar,
   Selected,
-  Wrapper,
   User,
+  Wrapper,
 } from "..";
 import app from "../../database/firebaseConfig";
 import { useAppSelector } from "../../hooks/hooks";
