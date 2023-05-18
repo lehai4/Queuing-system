@@ -36,7 +36,7 @@ const ApplianceDetail = (props: PropsApplianceDetail) => {
           }}
         />
         <Wrapper className="absolute top-1 right-11">
-          <User />
+          <User isLayoutChange={true} />
         </Wrapper>
         <Wrapper className="flex flex-row md:mt-5 gap-7">
           <Wrapper className="flex-1 md:mb-4 p-2 md:p-8 md:pb-96 md:pt-4 md:pl-6 bg-white rounded-3xl">

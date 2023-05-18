@@ -1,5 +1,6 @@
 import { useState } from "react";
 import {
+  DatePickers,
   Header,
   Helmet,
   Input,
@@ -8,18 +9,13 @@ import {
   Wrapper,
 } from "../components";
 import User from "../components/User";
-import { ApplianceProp } from "../typeProps";
 
 const Service = () => {
   const [active, setActive] = useState<string>("Tất cả");
-  const [connected, setConnected] = useState<string>("Tất cả");
-  const [toggle, setToggle] = useState<boolean>(false);
-  const [service, setService] = useState<string>("");
   const [searchInput, setSearchInput] = useState<string>("");
-  const [appliance, setAppliance] = useState<ApplianceProp[]>([]);
-  const [applianceOriginal, setApplianceOriginal] = useState<ApplianceProp[]>(
-    []
-  );
+  const [serviceArr, setServiceArr] = useState<any[]>([]);
+  const [startDate, setStartDate] = useState<Date | undefined>(new Date());
+  const [endDate, setEndDate] = useState<Date | undefined>(new Date());
   return (
     <Wrapper className="md:mb-0 md:ml-0 mt-24 md:pb-6 md:pt-4 md:pl-6 bg-main-grey rounded-3xl">
       <div className="absolute md:static md:mb-7 dark:bg-main-dark-bg navbar">
@@ -44,7 +40,7 @@ const Service = () => {
           }}
         />
         <Wrapper className="absolute top-1 right-11">
-          <User />
+          <User isLayoutChange={true} />
         </Wrapper>
         <Wrapper className="flex flex-row filter-option justify-between md:mr-28 md:mb-4 md:mt-5">
           <Wrapper className="flex flex-row gap-6">
@@ -54,20 +50,22 @@ const Service = () => {
                 optionComon="Tất cả"
                 isShowCommon={true}
                 setValue={setActive}
-                items={applianceOriginal.map((act) => act.statusActive)}
+                items={serviceArr.map((act) => act.statusActive)}
               />
             </Wrapper>
-            {/* <Wrapper className="flex flex-col filter-option-selector">
-              <label className="label-title">Trạng thái kết nối</label>
-              <Selector
-                optionComon="Tất cả"
-                isShowCommon={true}
-                setValue={setConnected}
-                items={applianceOriginal.map(
-                  (connect) => connect.statusConnect
-                )}
+          </Wrapper>
+          <Wrapper className="flex flex-col">
+            <label className="label-title">Chọn thời gian</label>
+            <Wrapper className="flex flex-row items-center">
+              <DatePickers
+                valueStart={startDate}
+                valueEnd={endDate}
+                showIcon={true}
+                isRange={true}
+                setValueStart={(preV) => setStartDate(preV)}
+                setValueEnd={(preV) => setEndDate(preV)}
               />
-            </Wrapper> */}
+            </Wrapper>
           </Wrapper>
           <Wrapper className="flex flex-col filter-option-search">
             <label className="label-title">Từ khóa</label>
@@ -83,35 +81,6 @@ const Service = () => {
             />
           </Wrapper>
         </Wrapper>
-        {/* <Wrapper className="content flex flex-row gap-7">
-          <Wrapper className="content-table">
-            <DataTable
-              columns={columns}
-              data={appliance}
-              pagination
-              responsive
-              paginationPerPage={10}
-              paginationRowsPerPageOptions={[5, 10, 15, 20]}
-              paginationComponentOptions={paginationComponentOptions}
-            />
-          </Wrapper>
-          <Button
-            text="Thêm thiết bị"
-            handleClick={handleShowFormAdd}
-            style={{
-              backgroundColor: "#FFF2E7",
-              height: 94,
-              width: 80,
-              color: "#FF7506",
-              lineHeight: "19px",
-              fontSize: 14,
-              padding: 8,
-              borderRadius: 8,
-            }}
-            icon={plus}
-            bgHoverColor=""
-          />
-        </Wrapper> */}
       </Helmet>
     </Wrapper>
   );

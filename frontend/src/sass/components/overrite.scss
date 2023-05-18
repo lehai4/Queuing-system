@@ -10,6 +10,9 @@
 .w-90 {
   width: 22.5rem;
 }
+.w-96-override {
+  width: 469px;
+}
 .w-97 {
   width: 400px;
 }
@@ -51,7 +54,10 @@
 .pl-27-override {
   margin-left: 27px;
 }
-
+.text-2xl-override {
+  font-size: 1.4rem;
+  line-height: 2rem;
+}
 .capitalize {
   font-style: bold;
   font-size: 16px;

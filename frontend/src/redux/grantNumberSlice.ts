@@ -1,8 +1,9 @@
 import { createSlice, createAsyncThunk } from "@reduxjs/toolkit";
 import { GrantNumberInterface } from "../typeProps";
-
+import type { PayloadAction } from "@reduxjs/toolkit";
 import { child, get, getDatabase, ref, set } from "firebase/database";
 import app from "../database/firebaseConfig";
+import { toast } from "react-toastify";
 
 const dbRef = ref(getDatabase(app));
 type grantProps = {
@@ -22,7 +23,17 @@ const initialState: initialStateType = {
 const grantNumberSlice = createSlice({
   name: "grantNumber",
   initialState,
-  reducers: {},
+  reducers: {
+    addGrantNumber: (state, action: PayloadAction<GrantNumberInterface>) => {
+      return {
+        ...state,
+        grantNumber: {
+          ...state.grantNumber,
+          grantArr: [...state.grantNumber.grantArr, action.payload],
+        },
+      };
+    },
+  },
   extraReducers: (builder) => {
     builder
       .addCase(fetchGrantNumber.pending, (state) => {
@@ -51,5 +62,13 @@ export const fetchGrantNumber = createAsyncThunk(
   }
 );
 
-export const {} = grantNumberSlice.actions;
+export function addGrantNumberNew(data: GrantNumberInterface) {
+  return function addGrantNumberNewThunk(dispath: any, getState: any) {
+    // custom
+
+    dispath(addGrantNumber(data));
+  };
+}
+
+export const { addGrantNumber } = grantNumberSlice.actions;
 export default grantNumberSlice.reducer;

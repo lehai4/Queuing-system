@@ -9,9 +9,17 @@ const formatTimeStamp = (value: any) => {
     hours + "h" + minutes + " ngày " + moment(value).format("DD/MM/YYYY");
   return formattedTime;
 };
-const Notification = () => {
+type NotiProps = {
+  isLayoutChange: boolean;
+};
+const Notification = (props: NotiProps) => {
+  const { isLayoutChange } = props;
   return (
-    <Wrapper className="notification w-90 z-10 md:mt-3 absolute overscroll-contain">
+    <Wrapper
+      className={`notification w-90 z-10 md:mt-3 absolute overscroll-contain ${
+        isLayoutChange && "isLayoutChange"
+      }`}
+    >
       <Wrapper className="bg-orange-400 h-12 items-center flex justify-center rounded-t-xl">
         <Header
           title="Thông báo"

@@ -57,3 +57,10 @@ export interface GrantNumberInterface {
   phone: string;
   email: email;
 }
+export interface ReportInterface {
+  stt: string;
+  nameService: string;
+  timeGrant: Date;
+  status: number;
+  sourceProvider: string;
+}

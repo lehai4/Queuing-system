@@ -65,7 +65,7 @@ const Appliance = () => {
           <span className="service">{row.useService}</span>
           <button
             className="underline btn btn-additional"
-            onClick={() => handleSeeMore(row.useService, index)}
+            onClick={() => handleSeeMore(row.useService)}
           >
             Xem thêm
           </button>
@@ -118,7 +118,7 @@ const Appliance = () => {
   const [applianceOriginal, setApplianceOriginal] = useState<ApplianceProp[]>(
     []
   );
-  const handleSeeMore = (service: string, index: number) => {
+  const handleSeeMore = (service: string) => {
     setToggle(true);
     setService(service);
   };
@@ -187,7 +187,7 @@ const Appliance = () => {
           }}
         />
         <Wrapper className="absolute top-1 right-11">
-          <User />
+          <User isLayoutChange={true} />
         </Wrapper>
         <Wrapper className="flex flex-row filter-option justify-between md:mr-28 md:mb-4 md:mt-5">
           <Wrapper className="flex flex-row gap-6">

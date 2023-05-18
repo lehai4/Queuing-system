@@ -9,7 +9,9 @@ type SelectorProps = {
 const Selector = (props: SelectorProps) => {
   const [selected, setSelected] = useState<string>(props.optionComon);
   const [open, setOpen] = useState(false);
+
   const newArr = props.optionComon;
+
   const currentArr = props.isShowCommon
     ? [newArr, ...props.items]
     : props.items;
@@ -28,8 +30,8 @@ const Selector = (props: SelectorProps) => {
         `}
       >
         {selected
-          ? selected?.length > 25
-            ? selected?.substring(0, 25) + "..."
+          ? selected?.length > 19
+            ? selected?.substring(0, 19) + "..."
             : selected
           : `${props.optionComon}`}
         <img src={`${arrow}`} alt="" className={`${open && "rotate-180"}`} />

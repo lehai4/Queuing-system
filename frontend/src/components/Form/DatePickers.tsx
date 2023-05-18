@@ -11,7 +11,7 @@ type DatePickerProps = {
   setValueEnd: (value: Date) => void;
 };
 
-const Date = (props: DatePickerProps) => {
+const DatePickers = (props: DatePickerProps) => {
   return (
     <>
       {!props.isRange ? (
@@ -48,4 +48,4 @@ const Date = (props: DatePickerProps) => {
   );
 };
 
-export default Date;
+export default DatePickers;

@@ -28,6 +28,13 @@ const applianceSlice = createSlice({
   reducers: {
     addAppliance: (state, action: PayloadAction<ApplianceProp>) => {
       state.appliance.applianceArr.push(action.payload);
+      return {
+        ...state,
+        appliance: {
+          ...state.appliance,
+          grantArr: [...state.appliance.applianceArr, action.payload],
+        },
+      };
     },
   },
   extraReducers: (builder) => {
@@ -76,14 +83,3 @@ export const addNewAppliance = createAsyncThunk(
 );
 export const { addAppliance } = applianceSlice.actions;
 export default applianceSlice.reducer;
-
-// export function addAppliances(data: ApplianceProp) {
-//   return function addAppliancesThunk(dispath: any, getState: any) {
-//     console.log("Thunk", getState());
-//     // custom
-//     data.passSignIn = "CMMMM";
-//     dispath(addAppliance(data));
-
-//     console.log("Thunk after", getState());
-//   };
-// }

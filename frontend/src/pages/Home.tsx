@@ -102,7 +102,7 @@ const Home = () => {
         <Wrapper className="col-span-1 relative bg-white min-h-screen">
           <Wrapper className="md:mb-0 md:ml-0 mt-24 md:p-6 md:pt-0 rounded-3xl">
             <Wrapper className="absolute top-1 left-2/4 -translate-x-2/4">
-              <User />
+              <User isLayoutChange={false} />
             </Wrapper>
             <Wrapper className="md:mt-28">
               <Header

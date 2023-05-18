@@ -3,7 +3,7 @@ import DataTable, { TableColumn } from "react-data-table-component";
 import plus from "../assets/icon/add-square.png";
 import {
   Button,
-  Date,
+  DatePickers,
   Header,
   Helmet,
   Input,
@@ -13,7 +13,7 @@ import {
 } from "../components";
 import User from "../components/User";
 import { GrantNumberInterface } from "../typeProps";
-
+import moment from "moment";
 import { Link } from "react-router-dom";
 import { useAppDispatch, useAppSelector } from "../hooks/hooks";
 import { paginationComponentOptions, statusGrant } from "../mock/dummy";
@@ -29,9 +29,10 @@ const Service = () => {
   const grantNumbers = useAppSelector(
     (state) => state.grantNumbers.grantNumber.grantArr
   );
-  const [startDate, setStartDate] = useState<Date | undefined>();
-  const [endDate, setEndDate] = useState<Date | undefined>();
+  const [startDate, setStartDate] = useState<Date | undefined>(new Date());
+  const [endDate, setEndDate] = useState<Date | undefined>(new Date());
   const [nameService, setNameService] = useState<string>("Tất cả");
+  const [sourceProvider, setSourceProvider] = useState<string>("Tất cả");
   const [status, setStatus] = useState<string>("Tất cả");
   const [searchInput, setSearchInput] = useState<string>("");
   const [grantNumber, setGrantNumber] = useState<GrantNumberInterface[]>([]);
@@ -88,7 +89,6 @@ const Service = () => {
           <Link
             to={`chi-tiet/${row.stt}`}
             className="btn btn-detail underline capitalize rounded-2xl text-md"
-            onClick={() => {}}
           >
             Chi tiết
           </Link>
@@ -101,15 +101,72 @@ const Service = () => {
       width: "140px",
     },
   ];
+  const convertDate = (value: any) => {
+    let date = new Date(value);
+    return date;
+  };
+  useEffect(() => {
+    let filterResult: GrantNumberInterface[] = grantNumberOriginal;
+    filterResult =
+      searchInput !== ""
+        ? grantNumberOriginal.filter((app) => app.stt == searchInput)
+        : filterResult;
+    filterResult =
+      nameService !== "Tất cả"
+        ? filterResult.filter((app) => app.nameService === nameService)
+        : filterResult;
+    filterResult =
+      status !== "Tất cả"
+        ? filterResult.filter((app) => {
+            let curentValue: string = "";
+            if (app.status === 1) {
+              curentValue = "Đã sử dụng";
+            } else if (app.status === 0) {
+              curentValue = "Đang chờ";
+            } else if (app.status === -1) {
+              curentValue = "Bỏ qua";
+            }
+            return curentValue == status;
+          })
+        : filterResult;
+    filterResult =
+      sourceProvider !== "Tất cả"
+        ? filterResult.filter((app) => {
+            return app.sourceProvider === sourceProvider;
+          })
+        : filterResult;
+    setGrantNumber(filterResult);
+  }, [nameService, status, sourceProvider, searchInput]);
+
   useEffect(() => {
     setGrantNumber(grantNumbers);
     setGrantNumberOriginal(grantNumbers);
   }, [grantNumbers]);
-
+  useEffect(() => {
+    let filterResult: GrantNumberInterface[] = grantNumberOriginal;
+    filterResult =
+      startDate !== null && endDate !== null
+        ? grantNumberOriginal.filter(
+            (item) =>
+              (moment(convertDate(item.timeGrant), "DD/MM/YYYY").isSameOrAfter(
+                moment(startDate)
+              ) &&
+                moment(endDate).isSameOrAfter(
+                  moment(convertDate(item.timeGrant), "DD/MM/YYYY")
+                )) ||
+              (moment(convertDate(item.expireUse), "DD/MM/YYYY").isSameOrAfter(
+                moment(startDate)
+              ) &&
+                moment(endDate).isSameOrAfter(
+                  moment(convertDate(item.expireUse), "DD/MM/YYYY")
+                ))
+          )
+        : filterResult;
+    setGrantNumber(filterResult);
+  }, [startDate, endDate]);
   useEffect(() => {
     dispatch(fetchGrantNumber());
   }, []);
-
   return (
     <Wrapper className="md:mb-0 md:ml-0 mt-24 md:pb-6 md:pt-4 md:pl-6 bg-main-grey rounded-3xl">
       <div className="absolute md:static md:mb-7 dark:bg-main-dark-bg navbar">
@@ -134,11 +191,11 @@ const Service = () => {
           }}
         />
         <Wrapper className="absolute top-1 right-11">
-          <User />
+          <User isLayoutChange={true} />
         </Wrapper>
         <Wrapper className="flex flex-row filter-option justify-between md:mr-28 md:mb-4 md:mt-5">
           <Wrapper className="flex flex-row gap-6">
-            <Wrapper className="flex flex-col w-40">
+            <Wrapper className="flex flex-col w-48">
               <label className="label-title">Tên dịch vụ</label>
               <Selector
                 optionComon="Tất cả"
@@ -153,7 +210,17 @@ const Service = () => {
                 optionComon="Tất cả"
                 isShowCommon={true}
                 setValue={setStatus}
-                items={grantNumberOriginal.map((connect) => connect.status)}
+                items={grantNumberOriginal
+                  .map((item) => {
+                    return item.status === 1
+                      ? "Đã sử dụng"
+                      : item.status === 0
+                      ? "Đang chờ"
+                      : item.status === -1
+                      ? "Bỏ qua"
+                      : [];
+                  })
+                  .map((item) => item)}
               />
             </Wrapper>
             <Wrapper className="flex flex-col w-40">
@@ -161,7 +228,7 @@ const Service = () => {
               <Selector
                 optionComon="Tất cả"
                 isShowCommon={true}
-                setValue={setStatus}
+                setValue={setSourceProvider}
                 items={grantNumberOriginal.map(
                   (connect) => connect.sourceProvider
                 )}
@@ -171,7 +238,7 @@ const Service = () => {
           <Wrapper className="flex flex-col">
             <label className="label-title">Chọn thời gian</label>
             <Wrapper className="flex flex-row items-center">
-              <Date
+              <DatePickers
                 valueStart={startDate}
                 valueEnd={endDate}
                 showIcon={true}
@@ -207,7 +274,7 @@ const Service = () => {
               paginationComponentOptions={paginationComponentOptions}
             />
           </Wrapper>
-          <Link to={`cap-so-moi`}>
+          <Link to="cap-so-moi">
             <Button
               text="Cấp số mới"
               handleClick={() => {}}

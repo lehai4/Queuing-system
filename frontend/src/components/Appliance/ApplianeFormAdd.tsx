@@ -100,7 +100,7 @@ const ApplianceFormAdd = () => {
           }}
         />
         <Wrapper className="absolute top-1 right-11">
-          <User />
+          <User isLayoutChange={true} />
         </Wrapper>
         <Wrapper className="md:m-14 md:mb-0 md:ml-0 mt-24 p-2 md:p-8 md:pb-12 md:pt-4 md:pl-6 bg-white rounded-3xl">
           <Wrapper className="form-appliance">

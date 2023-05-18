@@ -23,4 +23,4 @@ export { default as Selector } from "./Form/Selector";
 export { default as Radio } from "./Form/Radio";
 export { default as Helmet } from "./Helmet";
 export { default as NotFound } from "./NotFound";
-export { default as Date } from "./Form/Date";
+export { default as DatePickers } from "./Form/DatePickers";

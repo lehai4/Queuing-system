@@ -31,7 +31,10 @@ const NavButton = ({
     </button>
   </Tooltip>
 );
-const User = () => {
+type UserProp = {
+  isLayoutChange: boolean;
+};
+const User = ({ isLayoutChange }: UserProp) => {
   const bgColor = "#FFF2E7";
   const [toggle, setToggle] = useState<boolean>(false);
   const user = useAppSelector((state) => state.auth.login.currentUser?.user);
@@ -64,7 +67,7 @@ const User = () => {
           </Wrapper>
         </Wrapper>
       </Wrapper>
-      {toggle && <Notification />}
+      {toggle && <Notification isLayoutChange={isLayoutChange} />}
     </Wrapper>
   );
 };

@@ -20,6 +20,9 @@ a {
 :focus {
   outline: 0;
 }
+input:focus {
+  color: #111;
+}
 input,
 select {
   outline: none;

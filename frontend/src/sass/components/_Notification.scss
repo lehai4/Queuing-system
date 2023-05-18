@@ -1,10 +1,10 @@
-.css-vpvk9c {
+.css-1omvlcf {
   > div:last-child {
     border-bottom-width: 0;
   }
 }
 ::-webkit-scrollbar {
-  width: 4px;
+  width: 2px;
 }
 
 /* Track */
@@ -20,4 +20,7 @@
 /* Handle on hover */
 ::-webkit-scrollbar-thumb:hover {
   opacity: 0.4;
+}
+.isLayoutChange {
+  transform: translateX(-40%);
 }

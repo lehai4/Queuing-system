@@ -1,9 +1,24 @@
 import { useState } from "react";
 import { Button, Header, Helmet, Navbar, Selector, User, Wrapper } from "..";
 import { useNavigate } from "react-router-dom";
+import { useAppDispatch, useAppSelector } from "../../hooks/hooks";
+import ModalViewPrinterNumber from "../Modal/ModalViewPrinterNumber";
+import { child, getDatabase, ref, set } from "firebase/database";
+import { toast } from "react-toastify";
+import app from "../../database/firebaseConfig";
+import { addGrantNumberNew } from "../../redux/grantNumberSlice";
+import { GrantNumberInterface } from "../../typeProps";
 const GrantNumberNew = () => {
+  const user = useAppSelector((state) => state.auth.login.currentUser?.user);
+  const grantNumber = useAppSelector(
+    (state) => state.grantNumbers.grantNumber.grantArr
+  );
+  const dbRef = ref(getDatabase(app));
   const navigate = useNavigate();
+  const dispatch = useAppDispatch();
   const [service, setService] = useState<string>("");
+  const [toggle, setToggle] = useState<boolean>(false);
+  const [dataObj, setDataObj] = useState<any>();
   let serviceArrayCurrent = [
     "Khám tim mạch",
     "Khám sản - Phụ khoa",
@@ -11,7 +26,41 @@ const GrantNumberNew = () => {
     "Khám tai mũi họng",
     "Khám hô hấp",
   ];
-  const handlePrintNumber = () => {};
+
+  const closeModal = () => {
+    setToggle(false);
+    dispatch(addGrantNumberNew(dataObj));
+    handleWriteDatabase(dataObj, grantNumber.length + 1);
+  };
+  const handleWriteDatabase = (data: GrantNumberInterface, id: number) => {
+    set(child(dbRef, `grantNumber/` + id), data)
+      .then(() => {
+        toast.success(`Data saved successfully`);
+        navigate(-1);
+      })
+      .catch((error) => {
+        toast.error("The write failed", error);
+      });
+  };
+  const handlePrintNumber = () => {
+    if (service === "Chọn dịch vụ") {
+      toast.warning("Vui lòng chọn dịch vụ!");
+    } else {
+      setToggle(true);
+      setDataObj({
+        stt: grantNumber[grantNumber.length - 1]?.stt + 1,
+        name: user?.name,
+        nameService: service,
+        timeGrant: new Date().getTime(),
+        expireUse: new Date().getTime() + 15000000,
+        status: 0,
+        sourceProvider: "Hệ thống",
+        phone: user?.phone,
+        email: user?.email,
+      });
+      toast.success("Cấp số thành công!");
+    }
+  };
   const handleCancel = () => {
     navigate(-1);
   };
@@ -38,8 +87,8 @@ const GrantNumberNew = () => {
             lineHeight: "110%",
           }}
         />
-        <Wrapper className="absolute top-1 right-5">
-          <User />
+        <Wrapper className="absolute top-1 right-11">
+          <User isLayoutChange={true} />
         </Wrapper>
         <Wrapper className="flex flex-row md:mt-5 gap-7">
           <Wrapper className="flex-1 md:mb-4 p-2 md:p-8 md:pb-96 md:pt-4 md:pl-6 bg-white rounded-3xl">
@@ -105,6 +154,14 @@ const GrantNumberNew = () => {
           </Wrapper>
         </Wrapper>
       </Helmet>
+      {toggle && (
+        <ModalViewPrinterNumber
+          toggle={toggle}
+          service={service}
+          dataObj={dataObj}
+          closeModal={closeModal}
+        />
+      )}
     </Wrapper>
   );
 };
