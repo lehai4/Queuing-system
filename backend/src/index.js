@@ -1,6 +1,6 @@
 const express = require("express");
 const morgan = require("morgan");
-
+const bodyParser = require("body-parser");
 const cors = require("cors");
 const dotenv = require("dotenv");
 const cookieParser = require("cookie-parser");
@@ -25,6 +25,7 @@ app.use(
   })
 );
 app.use(express.json());
+app.use(bodyParser.json());
 
 //HTTP logger
 app.use(morgan("combined"));

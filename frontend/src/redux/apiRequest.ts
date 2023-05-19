@@ -31,6 +31,34 @@ export const signInUser = async (user: any, dispatch: any, navigate: any) => {
     dispatch(signInFailure());
   }
 };
+export const uploadImage = async (id: any, data: any) => {
+  try {
+    await axios({
+      method: "PUT",
+      url: `http://localhost:3001/v1/user/update/${id}`,
+      data,
+      headers: {
+        "Content-Type": "application/json",
+      },
+    });
+  } catch (err) {
+    console.error("error", err);
+  }
+};
+export const getUserById = async (id: any, dispatch: any, accessToken: any) => {
+  try {
+    const user: any = await axios({
+      method: "GET",
+      url: `http://localhost:3001/v1/user/${id}`,
+      headers: {
+        "Content-Type": "application/json",
+      },
+    });
+    dispatch(signInSuccess({ user: user.data, accessToken: accessToken }));
+  } catch (err) {
+    console.error("error", err);
+  }
+};
 export const registerUser = async (user: any, dispatch: any, navigate: any) => {
   dispatch(registerStart());
   try {

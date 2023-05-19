@@ -23,6 +23,7 @@ const authController = {
         active: req.body.active,
         role: req.body.role,
         admin: req.body.admin,
+        image: req.body.image,
       });
 
       //Save user to DB

@@ -23,4 +23,5 @@ export { default as NotFound } from "./NotFound";
 export { default as Rectangle } from "./Rectangle";
 export { default as Sidebar } from "./Sidebar";
 export { default as User } from "./User";
+export { default as Profile } from "./Profile";
 export { default as Wrapper } from "./Wrapper";

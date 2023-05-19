@@ -23,6 +23,9 @@ a {
 input:focus {
   color: #111;
 }
+input[type="file"] {
+  display: none;
+}
 input,
 select {
   outline: none;

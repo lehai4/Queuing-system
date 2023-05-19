@@ -13,7 +13,6 @@ const userSchema = new mongoose.Schema(
       type: String,
       require: true,
       max: 50,
-      unique: true,
     },
     password: {
       type: String,
@@ -29,7 +28,6 @@ const userSchema = new mongoose.Schema(
       type: String,
       require: true,
       max: 50,
-      unique: true,
     },
     phone: {
       type: String,
@@ -44,11 +42,14 @@ const userSchema = new mongoose.Schema(
       type: String,
       require: true,
       max: 50,
-      unique: true,
     },
     admin: {
       type: Boolean,
       default: false,
+    },
+    image: {
+      type: String,
+      require: true,
     },
   },
   { timestamps: true }

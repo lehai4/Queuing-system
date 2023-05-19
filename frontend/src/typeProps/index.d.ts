@@ -9,6 +9,7 @@ export interface User {
   role: string;
   _id: string;
   admin: boolean;
+  image: string;
 }
 interface currentUserProps {
   user?: User | null | undefined;

@@ -1,12 +1,14 @@
 import { Navigate, Route, Routes } from "react-router-dom";
 import {
-  Authentication,
+  ApplianceDetail,
   ApplianceFormAdd,
   ApplianceFormUpdate,
-  ApplianceDetail,
-  NotFound,
+  Authentication,
   GrantNumberNew,
+  NotFound,
+  Profile,
 } from "../components";
+import GrantNumberDetail from "../components/GrantNumber/GrantNumberDetail";
 import { useAppSelector } from "../hooks/hooks";
 import {
   Appliance,
@@ -16,8 +18,6 @@ import {
   Service,
   Setting,
 } from "../pages";
-import { ApplianceProp } from "../typeProps";
-import GrantNumberDetail from "../components/GrantNumber/GrantNumberDetail";
 export interface IRouterProps {}
 const Router: React.FunctionComponent<IRouterProps> = () => {
   const datas = useAppSelector(
@@ -66,6 +66,7 @@ const Router: React.FunctionComponent<IRouterProps> = () => {
       <Route path="/cap-so" element={<GrantNumber />} />
       <Route path="/bao-cao" element={<Report />} />
       <Route path="/cai-dat" element={<Setting />} />
+      <Route path="/profile" element={<Profile />} />
       <Route path="*" element={<NotFound />} />
     </Routes>
   );

@@ -5,6 +5,7 @@ import notifications from "../assets/icon/notifi.png";
 import avatar from "../assets/img/unsplash_Fyl8sMC2j2Q.png";
 import { useAppSelector } from "../hooks/hooks";
 import Notification from "./Notification";
+import { Link } from "react-router-dom";
 
 type NavButtonProps = {
   title: string;
@@ -37,7 +38,7 @@ type UserProp = {
 const User = ({ isLayoutChange }: UserProp) => {
   const bgColor = "#FFF2E7";
   const [toggle, setToggle] = useState<boolean>(false);
-  const user = useAppSelector((state) => state.auth.login.currentUser?.user);
+  const user = useAppSelector((state) => state.auth.login.currentUser);
   const handleToggle = () => {
     setToggle((preV) => !preV);
   };
@@ -53,16 +54,18 @@ const User = ({ isLayoutChange }: UserProp) => {
         />
         <Wrapper className="flex items-center gap-2 cursor-pointer hover:bg-light-gray rounded-lg">
           <Wrapper className="flex items-center">
-            <Tooltip title="Profile" placement="bottom">
-              <img
-                className="rounded-full w-9 h-9"
-                src={`${avatar}`}
-                alt="user-profile"
-              />
-            </Tooltip>
+            <Link to="/profile">
+              <Tooltip title="Profile" placement="bottom">
+                <img
+                  className="rounded-full w-9 h-9"
+                  src={user?.user?.image || avatar}
+                  alt="user-profile"
+                />
+              </Tooltip>
+            </Link>
             <Wrapper className="flex flex-col ml-2">
               <span className="welcome">Xin chào</span>
-              <span className="username">{user?.name}</span>
+              <span className="username">{user?.user?.name}</span>
             </Wrapper>
           </Wrapper>
         </Wrapper>
