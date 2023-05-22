@@ -1,8 +1,10 @@
 import { Box } from "@mui/material";
-import { useRef, useState } from "react";
+import { useEffect, useRef, useState } from "react";
 import { Header, Helmet, User, Wrapper } from ".";
 import { useAppDispatch, useAppSelector } from "../hooks/hooks";
 import { getUserById, uploadImage } from "../redux/apiRequest";
+import profileDefault from "../assets/img/profile.png";
+
 function convertToBase64(file: any) {
   return new Promise((resolve, reject) => {
     const fileReader = new FileReader();
@@ -28,7 +30,7 @@ const Profile = () => {
     },
     {
       text: "Số điện thoại",
-      data: user?.user?.phone,
+      data: `0${user?.user?.phone}`,
     },
     {
       text: "Email",
@@ -53,9 +55,12 @@ const Profile = () => {
     let file = e.target.files[0];
     const base64 = await convertToBase64(file);
     setPost({ ...post, myfile: base64 });
-    await uploadImage(user?.user?._id, { image: base64 });
+    await uploadImage(user?.user?._id, { image: base64 }, user?.accessToken);
     await getUserById(user?.user?._id, dispatch, user?.accessToken);
   };
+  useEffect(() => {
+    console.log(user?.user);
+  }, [user]);
   return (
     <Wrapper className="md:mb-0 md:ml-0 mt-24 md:pb-6 md:pt-4 md:pl-6 bg-main-grey rounded-3xl">
       <Helmet title="profile">
@@ -87,8 +92,11 @@ const Profile = () => {
                   <label htmlFor="file-upload">
                     <img
                       ref={imageRef}
-                      className="image-profile"
-                      src={user?.user?.image || post.myfile}
+                      src={
+                        user?.user?.image === ""
+                          ? profileDefault
+                          : user?.user?.image
+                      }
                       alt=""
                     />
                     <input

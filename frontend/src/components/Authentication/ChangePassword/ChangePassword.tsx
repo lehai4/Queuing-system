@@ -1,4 +1,7 @@
+import { SvgIcon } from "@mui/material";
 import { useFormik } from "formik";
+import { useState } from "react";
+import { MdVisibility, MdVisibilityOff } from "react-icons/md";
 import { useNavigate } from "react-router-dom";
 import { toast } from "react-toastify";
 import * as Yup from "yup";
@@ -13,6 +16,9 @@ let initialValues: initialize = {
 };
 
 const ChangePassword = () => {
+  const [toggle, setToggle] = useState<boolean>(false);
+  const [toggleConfirm, setToggleConfirm] = useState<boolean>(false);
+
   const navigate = useNavigate();
   const formik = useFormik({
     initialValues,
@@ -27,7 +33,12 @@ const ChangePassword = () => {
       navigate("/auth");
     },
   });
-
+  const handleToggle = () => {
+    setToggle((preV) => !preV);
+  };
+  const handleToggleConfirm = () => {
+    setToggleConfirm((preV) => !preV);
+  };
   return (
     <form
       onSubmit={formik.handleSubmit}
@@ -36,32 +47,56 @@ const ChangePassword = () => {
       <h3 className="mb-3 mt-12 flex justify-center">Đặt lại mật khẩu mới</h3>
       <Wrapper className="form__group-user flex flex-col">
         <label htmlFor="">Mật khẩu</label>
-        <Input
-          typeInput="password"
-          id="password"
-          name="password"
-          placeholder=""
-          className="mt-2 mb-3"
-          width={400}
-          value={formik.values.password}
-          handleChange={formik.handleChange}
-        />
+        <Wrapper className="flex flex-row items-center">
+          <Input
+            typeInput={toggle ? "password" : "text"}
+            id="password"
+            name="password"
+            placeholder=""
+            className="mt-2 mb-3"
+            width={400}
+            value={formik.values.password}
+            handleChange={formik.handleChange}
+          />
+          <div onClick={handleToggle}>
+            {toggle ? (
+              <SvgIcon
+                component={MdVisibilityOff}
+                style={{ marginLeft: -40 }}
+              />
+            ) : (
+              <SvgIcon component={MdVisibility} style={{ marginLeft: -40 }} />
+            )}
+          </div>
+        </Wrapper>
       </Wrapper>
       {formik.errors.password && (
         <p className="mes__error">{formik.errors.password}</p>
       )}
       <Wrapper className="form__group-user flex flex-col">
         <label htmlFor="">Nhập lại mật khẩu</label>
-        <Input
-          typeInput="password"
-          id="confirmPassword"
-          name="confirmPassword"
-          placeholder=""
-          className="mt-2 mb-3"
-          width={400}
-          value={formik.values.confirmPassword}
-          handleChange={formik.handleChange}
-        />
+        <Wrapper className="flex flex-row items-center">
+          <Input
+            typeInput={toggleConfirm ? "password" : "text"}
+            id="confirmPassword"
+            name="confirmPassword"
+            placeholder=""
+            className="mt-2 mb-3"
+            width={400}
+            value={formik.values.confirmPassword}
+            handleChange={formik.handleChange}
+          />
+          <div onClick={handleToggleConfirm}>
+            {toggleConfirm ? (
+              <SvgIcon
+                component={MdVisibilityOff}
+                style={{ marginLeft: -40 }}
+              />
+            ) : (
+              <SvgIcon component={MdVisibility} style={{ marginLeft: -40 }} />
+            )}
+          </div>
+        </Wrapper>
       </Wrapper>
       {formik.errors.confirmPassword && (
         <p className="mes__error">{formik.errors.confirmPassword}</p>

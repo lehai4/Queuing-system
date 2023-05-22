@@ -5,6 +5,7 @@ export { default as AuthForm } from "./Authentication/AuthForm";
 export { default as Authentication } from "./Authentication/Authentication";
 export { default as ChangePassword } from "./Authentication/ChangePassword/ChangePassword";
 export { default as ConfirmEmail } from "./Authentication/ConfirmEmail/ConfirmEmail";
+export { default as AddAccountPage } from "./Setting/AddAccountPage";
 export { default as SignIn } from "./Authentication/SignIn/SignIn";
 export { default as Direction } from "./Direction";
 export { default as Button } from "./Form/Button";

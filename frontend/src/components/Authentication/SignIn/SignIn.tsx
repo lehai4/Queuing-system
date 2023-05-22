@@ -4,6 +4,9 @@ import { Link, useNavigate } from "react-router-dom";
 import * as Yup from "yup";
 import { signInUser } from "../../../redux/apiRequest";
 import { Button, Input, Wrapper } from "../../index";
+import { SvgIcon } from "@mui/material";
+import { MdVisibility, MdVisibilityOff } from "react-icons/md";
+import { useRef, useState } from "react";
 export interface initialize {
   username: string;
   password: string;
@@ -13,6 +16,8 @@ let initialValues: initialize = {
   password: "",
 };
 const SignIn = () => {
+  const [toggle, setToggle] = useState<boolean>(false);
+  const refVisibility = useRef(null);
   const navigate = useNavigate();
   const dispatch = useDispatch();
   const formik = useFormik({
@@ -30,7 +35,9 @@ const SignIn = () => {
       signInUser(e, dispatch, navigate);
     },
   });
-
+  const handleToggle = () => {
+    setToggle((preV) => !preV);
+  };
   return (
     <form onSubmit={formik.handleSubmit} className="form__group m-12 p-12">
       <Wrapper className="form__group-user flex flex-col">
@@ -51,16 +58,29 @@ const SignIn = () => {
       </Wrapper>
       <Wrapper className="form__group-password flex flex-col">
         <label htmlFor="">Mật khẩu *</label>
-        <Input
-          typeInput="password"
-          id="password"
-          name="password"
-          placeholder=""
-          className="mt-2 mb-3"
-          width={400}
-          value={formik.values.password}
-          handleChange={formik.handleChange}
-        />
+        <Wrapper className="flex flex-row items-center">
+          <Input
+            typeInput={toggle ? "password" : "text"}
+            id="password"
+            name="password"
+            placeholder=""
+            className="mt-2 mb-3"
+            width={400}
+            value={formik.values.password}
+            handleChange={formik.handleChange}
+          />
+          <div ref={refVisibility} onClick={handleToggle}>
+            {toggle ? (
+              <SvgIcon
+                component={MdVisibilityOff}
+                style={{ marginLeft: -40 }}
+              />
+            ) : (
+              <SvgIcon component={MdVisibility} style={{ marginLeft: -40 }} />
+            )}
+          </div>
+        </Wrapper>
+
         {formik.errors.password && (
           <p className="mes__error">{formik.errors.password}</p>
         )}

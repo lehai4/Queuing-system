@@ -52,9 +52,9 @@ const User = ({ isLayoutChange }: UserProp) => {
           img={`${notifications}`}
           handleClick={handleToggle}
         />
-        <Wrapper className="flex items-center gap-2 cursor-pointer hover:bg-light-gray rounded-lg">
-          <Wrapper className="flex items-center">
-            <Link to="/profile">
+        <Link to="/profile">
+          <Wrapper className="cursor-pointer hover:bg-light-gray rounded-lg">
+            <Wrapper className="flex items-center">
               <Tooltip title="Profile" placement="bottom">
                 <img
                   className="rounded-full w-9 h-9"
@@ -62,13 +62,13 @@ const User = ({ isLayoutChange }: UserProp) => {
                   alt="user-profile"
                 />
               </Tooltip>
-            </Link>
-            <Wrapper className="flex flex-col ml-2">
-              <span className="welcome">Xin chào</span>
-              <span className="username">{user?.user?.name}</span>
+              <Wrapper className="flex flex-col ml-2">
+                <span className="welcome">Xin chào</span>
+                <span className="username">{user?.user?.name}</span>
+              </Wrapper>
             </Wrapper>
           </Wrapper>
-        </Wrapper>
+        </Link>
       </Wrapper>
       {toggle && <Notification isLayoutChange={isLayoutChange} />}
     </Wrapper>

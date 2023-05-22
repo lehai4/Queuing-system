@@ -22,10 +22,8 @@ const authController = {
         phone: req.body.phone,
         active: req.body.active,
         role: req.body.role,
-        admin: req.body.admin,
         image: req.body.image,
       });
-
       //Save user to DB
       const user = await newUser.save();
       return res.status(200).json(user);

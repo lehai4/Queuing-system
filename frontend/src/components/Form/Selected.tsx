@@ -18,7 +18,6 @@ const Selected = (props: SelectProp) => {
   const [selectedOptionMulti, setSelectedOptionMulti] = useState<
     SelectedProps[]
   >([]);
-
   // select
   let valueCurr = { label: value, value: value };
   const handleSelectChange = (e: any) => {
@@ -31,12 +30,18 @@ const Selected = (props: SelectProp) => {
     });
   };
   // select Multi
-  let valueMulti = value?.split(", ").map((item: any) => {
-    return {
-      label: item,
-      value: item,
-    };
-  });
+  let valueMulti =
+    typeof value === "string"
+      ? value?.split(", ").map((item: any) => {
+          return {
+            label: item,
+            value: item,
+          };
+        })
+      : {
+          label: "",
+          value: "",
+        };
   const handleSelectChangeMulti = (e: any) => {
     setSelectedOptionMulti(e);
     let newValue = e

@@ -1,4 +1,3 @@
-import iconCatdat from "../assets/icon/setting.png";
 import iconMoniter from "../assets/icon/monitor.png";
 import iconDichvu from "../assets/icon/dichvu.png";
 import iconCapso from "../assets/icon/capso.png";
@@ -24,6 +23,9 @@ type gridActiveAplianceProps = {
 type gridConnectAplianceProps = {
   statusConnect: string;
 };
+type gridStatusAccountProps = {
+  active: boolean;
+};
 export const links = [
   {
     name: "Daskboard",
@@ -34,31 +36,25 @@ export const links = [
   {
     name: "Thiết bị",
     iconVector: iconMoniter,
-    path: "thiet-bi",
+    path: "/thiet-bi",
     children: "",
   },
   {
     name: "Dịch vụ",
     iconVector: iconDichvu,
-    path: "dich-vu",
+    path: "/dich-vu",
     children: "",
   },
   {
     name: "Cấp số",
     iconVector: iconCapso,
-    path: "cap-so",
+    path: "/cap-so",
     children: "",
   },
   {
     name: "Báo cáo",
     iconVector: iconBaocao,
-    path: "bao-cao",
-    children: "",
-  },
-  {
-    name: "Cài đặt hệ thống",
-    iconVector: iconCatdat,
-    path: "cai-dat",
+    path: "/bao-cao",
     children: "",
   },
 ];
@@ -158,6 +154,42 @@ export const statusGrant = (data: number | undefined) => {
     </>
   );
 };
+
+export const gridStatusAccount = (props: gridStatusAccountProps) => (
+  <>
+    {props.active ? (
+      <div className="status status--active inline-flex items-center">
+        <img
+          src={`${active}`}
+          alt=""
+          style={{ borderRadius: "50%", height: "fit-content" }}
+        />
+        <button
+          type="button"
+          className="ml-2 button-active capitalize rounded-2xl text-md"
+        >
+          Hoạt động
+        </button>
+      </div>
+    ) : !props.active ? (
+      <div className="status status--disable inline-flex items-center">
+        <img
+          src={`${disabled}`}
+          alt=""
+          style={{ borderRadius: "50%", height: "fit-content" }}
+        />
+        <button
+          type="button"
+          className="ml-2 button-disable capitalize rounded-2xl text-md"
+        >
+          Ngưng hoạt động
+        </button>
+      </div>
+    ) : (
+      <></>
+    )}
+  </>
+);
 export const item = [
   {
     name: "Số thứ tự đã cấp",

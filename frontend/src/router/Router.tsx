@@ -1,5 +1,6 @@
 import { Navigate, Route, Routes } from "react-router-dom";
 import {
+  AddAccountPage,
   ApplianceDetail,
   ApplianceFormAdd,
   ApplianceFormUpdate,
@@ -14,6 +15,7 @@ import {
   Appliance,
   GrantNumber,
   Home,
+  ManagerAccount,
   Report,
   Service,
   Setting,
@@ -43,8 +45,11 @@ const Router: React.FunctionComponent<IRouterProps> = () => {
           )
         }
       />
-      <Route path="/auth" element={<Authentication />} />
-      <Route path="/auth/:slug" element={<Authentication />} />
+
+      <Route path="/auth" element={<Authentication />}>
+        <Route path=":slug" element={<Authentication />} />
+      </Route>
+
       <Route path="/thiet-bi/them-thiet-bi" element={<ApplianceFormAdd />} />
       <Route
         path="/thiet-bi/cap-nhat-thiet-bi/:slug"
@@ -55,7 +60,9 @@ const Router: React.FunctionComponent<IRouterProps> = () => {
         element={<ApplianceDetail getProductBySlug={getProductBySlug} />}
       />
       <Route path="/thiet-bi" element={<Appliance />} />
+
       <Route path="/dich-vu" element={<Service />} />
+
       <Route path="/cap-so/cap-so-moi" element={<GrantNumberNew />} />
       <Route
         path="/cap-so/chi-tiet/:slug"
@@ -64,9 +71,19 @@ const Router: React.FunctionComponent<IRouterProps> = () => {
         }
       />
       <Route path="/cap-so" element={<GrantNumber />} />
+
       <Route path="/bao-cao" element={<Report />} />
-      <Route path="/cai-dat" element={<Setting />} />
+
+      <Route
+        path="/cai-dat/quan-li-tai-khoan/them-tai-khoan"
+        element={<AddAccountPage />}
+      />
+      <Route path="/cai-dat">
+        <Route path="quan-li-tai-khoan" element={<ManagerAccount />} />
+      </Route>
+
       <Route path="/profile" element={<Profile />} />
+
       <Route path="*" element={<NotFound />} />
     </Routes>
   );

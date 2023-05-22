@@ -31,7 +31,7 @@ export const signInUser = async (user: any, dispatch: any, navigate: any) => {
     dispatch(signInFailure());
   }
 };
-export const uploadImage = async (id: any, data: any) => {
+export const uploadImage = async (id: any, data: any, accessToken: any) => {
   try {
     await axios({
       method: "PUT",
@@ -39,6 +39,7 @@ export const uploadImage = async (id: any, data: any) => {
       data,
       headers: {
         "Content-Type": "application/json",
+        token: `Bearer ${accessToken}`,
       },
     });
   } catch (err) {
@@ -52,6 +53,7 @@ export const getUserById = async (id: any, dispatch: any, accessToken: any) => {
       url: `http://localhost:3001/v1/user/${id}`,
       headers: {
         "Content-Type": "application/json",
+        token: `Bearer ${accessToken}`,
       },
     });
     dispatch(signInSuccess({ user: user.data, accessToken: accessToken }));
@@ -59,12 +61,11 @@ export const getUserById = async (id: any, dispatch: any, accessToken: any) => {
     console.error("error", err);
   }
 };
-export const registerUser = async (user: any, dispatch: any, navigate: any) => {
+export const registerUser = async (user: any, dispatch: any) => {
   dispatch(registerStart());
   try {
     await axios.post(`http://localhost:3001/v1/auth/register`, user);
     dispatch(registerSuccess());
-    navigate("/auth");
   } catch (e) {
     dispatch(registerFailure());
   }

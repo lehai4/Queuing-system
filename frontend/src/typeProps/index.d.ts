@@ -1,15 +1,18 @@
 export interface User {
+  _id: string;
   username: string;
+  email: string;
   password: string;
   confirmpassword: string;
-  email: string;
   name: string;
   phone: string;
   active: boolean;
   role: string;
-  _id: string;
   admin: boolean;
   image: string;
+  createdAt: string;
+  updatedAt: string;
+  _v: number;
 }
 interface currentUserProps {
   user?: User | null | undefined;
@@ -64,4 +67,20 @@ export interface ReportInterface {
   timeGrant: Date;
   status: number;
   sourceProvider: string;
+}
+export interface AccountProps {
+  _id: string;
+  username: string;
+  email: string;
+  password: string;
+  confirmpassword: string;
+  name: string;
+  phone: string;
+  active: boolean;
+  role: string;
+  admin: boolean;
+  image: string;
+  createdAt: string;
+  updatedAt: string;
+  _v: number;
 }
