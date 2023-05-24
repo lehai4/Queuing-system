@@ -10,10 +10,12 @@ const users: UsersProp = {
 };
 type initialStateType = {
   users: UsersProp;
+  passwordChange: User | undefined;
 };
 
 const initialState: initialStateType = {
   users,
+  passwordChange: undefined,
 };
 const userSlice = createSlice({
   name: "user",
@@ -44,6 +46,10 @@ const userSlice = createSlice({
       state.users.message = action.payload;
       state.users.error = true;
     },
+    //
+    changeConfirmPassword: (state, action: PayloadAction<User | undefined>) => {
+      state.passwordChange = action.payload;
+    },
   },
 });
 export const {
@@ -53,5 +59,6 @@ export const {
   deleteUserStart,
   deleteUserSuccess,
   deleteUserFailure,
+  changeConfirmPassword,
 } = userSlice.actions;
 export default userSlice.reducer;

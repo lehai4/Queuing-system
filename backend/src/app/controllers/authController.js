@@ -57,19 +57,18 @@ const authController = {
   },
   loginUser: async (req, res) => {
     try {
-      const user = await User.findOne({ username: req.body.username });
+      const user = await User.findOne({
+        username: req.body.username,
+        password: req.body.password,
+      });
       if (!user) {
-        return res.status(404).json("Incorrect username");
+        return res.status(404).json("Incorrect username or password");
       }
       // const validPassword = await bcrypt.compare(
       //   req.body.password,
       //   user.password
       // );
-      const validPassword = await User.findOne({ password: req.body.password });
-      if (!validPassword) {
-        return res.status(404).json("Incorrect password");
-      }
-      if (user && validPassword) {
+      if (user) {
         const accessToken = authController.generateAccessToken(user);
         const refreshToken = authController.generateRefreshToken(user);
 

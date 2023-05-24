@@ -8,6 +8,7 @@ import {
   GrantNumberNew,
   NotFound,
   Profile,
+  UpdateAccountPage,
 } from "../components";
 import GrantNumberDetail from "../components/GrantNumber/GrantNumberDetail";
 import { useAppSelector } from "../hooks/hooks";
@@ -29,7 +30,9 @@ const Router: React.FunctionComponent<IRouterProps> = () => {
     (state) => state.grantNumbers.grantNumber.grantArr
   );
   const user = useAppSelector((state) => state.auth.login.currentUser?.user);
+  const allUsers = useAppSelector((state) => state?.users?.users?.allUsers);
   const getProductBySlug = (slug: string) => datas.find((e) => e.uId == slug);
+  const getUserBySlug = (slug: string) => allUsers?.find((e) => e._id === slug);
   const getGrantNumberBySlug = (slug: string) =>
     granNumber.find((e) => e.stt == slug);
   return (
@@ -74,6 +77,10 @@ const Router: React.FunctionComponent<IRouterProps> = () => {
 
       <Route path="/bao-cao" element={<Report />} />
 
+      <Route
+        path="/cai-dat/quan-li-tai-khoan/cap-nhat-tai-khoan/:slug"
+        element={<UpdateAccountPage getUserBySlug={getUserBySlug} />}
+      />
       <Route
         path="/cai-dat/quan-li-tai-khoan/them-tai-khoan"
         element={<AddAccountPage />}

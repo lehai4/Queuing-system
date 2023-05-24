@@ -18,6 +18,7 @@ import {
   getUsersStart,
   getUsersSuccess,
 } from "./userSlice";
+import { toast } from "react-toastify";
 export const signInUser = async (user: any, dispatch: any, navigate: any) => {
   dispatch(signInStart());
   try {
@@ -25,13 +26,15 @@ export const signInUser = async (user: any, dispatch: any, navigate: any) => {
       `http://localhost:3001/v1/auth/signIn`,
       user
     );
+    toast.success("Login successfully");
     dispatch(signInSuccess(res.data));
     navigate("/dashboard");
   } catch (e) {
+    toast.error("Username or password is incorrect!");
     dispatch(signInFailure());
   }
 };
-export const uploadImage = async (id: any, data: any, accessToken: any) => {
+export const updateUser = async (id: any, data: any) => {
   try {
     await axios({
       method: "PUT",
@@ -39,7 +42,6 @@ export const uploadImage = async (id: any, data: any, accessToken: any) => {
       data,
       headers: {
         "Content-Type": "application/json",
-        token: `Bearer ${accessToken}`,
       },
     });
   } catch (err) {

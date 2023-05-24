@@ -1,11 +1,11 @@
 import Tooltip from "@mui/material/Tooltip";
 import { useState } from "react";
+import { Link } from "react-router-dom";
 import { Wrapper } from ".";
 import notifications from "../assets/icon/notifi.png";
 import avatar from "../assets/img/unsplash_Fyl8sMC2j2Q.png";
 import { useAppSelector } from "../hooks/hooks";
 import Notification from "./Notification";
-import { Link } from "react-router-dom";
 
 type NavButtonProps = {
   title: string;

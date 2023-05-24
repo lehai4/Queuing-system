@@ -1,4 +1,4 @@
-import { useRef, useState } from "react";
+import React, { useRef, useState } from "react";
 import { Link, NavLink, useLocation, useNavigate } from "react-router-dom";
 import iconLogOut from "../assets/icon/fi_log-out.png";
 import iconCatdat from "../assets/icon/setting.png";
@@ -8,7 +8,6 @@ import { useAppDispatch, useAppSelector } from "../hooks/hooks";
 import { links } from "../mock/dummy";
 import { logOut } from "../redux/apiRequest";
 import SidebarLinkGroup from "./SidebarLinkGroup";
-import React from "react";
 
 const Sidebar = () => {
   const currentColor = "#FF7506";

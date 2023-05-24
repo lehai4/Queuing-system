@@ -53,7 +53,7 @@ const ManagerAccount = () => {
     },
     {
       cell: (row) => (
-        <Link to={`${row._id}`}>
+        <Link to={`cap-nhat-tai-khoan/${row._id}`}>
           <div className="flex align-center">
             <button className="btn btn-detail underline capitalize rounded-2xl text-md">
               Cập nhật

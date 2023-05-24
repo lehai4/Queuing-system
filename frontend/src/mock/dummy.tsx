@@ -1,22 +1,24 @@
-import iconMoniter from "../assets/icon/monitor.png";
-import iconDichvu from "../assets/icon/dichvu.png";
-import iconCapso from "../assets/icon/capso.png";
-import iconBaocao from "../assets/icon/baocao.png";
-import iconDashboard from "../assets/icon/dashboard.png";
 import active from "../assets/icon/active.png";
-import disabled from "../assets/icon/disable.png";
+import iconBaocao from "../assets/icon/baocao.png";
 import iconOne from "../assets/icon/calender.png";
 import iconTwo from "../assets/icon/calender1.png";
+import iconCapso from "../assets/icon/capso.png";
 import iconThree from "../assets/icon/contact.png";
-import iconFour from "../assets/icon/star.png";
-import iconInscrease from "../assets/icon/increase.png";
+import iconDashboard from "../assets/icon/dashboard.png";
 import iconDescrease from "../assets/icon/decrease.png";
-import monitorMinor from "../assets/icon/monitorMinor.png";
-import service from "../assets/icon/mess.png";
-import grantnumber from "../assets/icon/icon dasboard03.png";
-import dotWaiting from "../assets/icon/dotdangcho.png";
+import iconDichvu from "../assets/icon/dichvu.png";
+import {
+  default as disabled,
+  default as dotboqa,
+} from "../assets/icon/disable.png";
 import dotsudung from "../assets/icon/dotBoqua.png";
-import dotboqa from "../assets/icon/disable.png";
+import dotWaiting from "../assets/icon/dotdangcho.png";
+import grantnumber from "../assets/icon/icon dasboard03.png";
+import iconInscrease from "../assets/icon/increase.png";
+import service from "../assets/icon/mess.png";
+import iconMoniter from "../assets/icon/monitor.png";
+import monitorMinor from "../assets/icon/monitorMinor.png";
+import iconFour from "../assets/icon/star.png";
 type gridActiveAplianceProps = {
   statusActive: string;
 };

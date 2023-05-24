@@ -1,6 +1,9 @@
 import { useFormik } from "formik";
 import { useNavigate } from "react-router-dom";
+import { toast } from "react-toastify";
 import * as Yup from "yup";
+import { useAppDispatch, useAppSelector } from "../../../hooks/hooks";
+import { changeConfirmPassword } from "../../../redux/userSlice";
 import { Button, Input, Wrapper } from "../../index";
 export interface initialize {
   email: string;
@@ -10,15 +13,22 @@ let initialValues: initialize = {
 };
 
 const ConfirmEmail = () => {
+  const dispath = useAppDispatch();
   const navigate = useNavigate();
+  const allUser = useAppSelector((state) => state.users.users.allUsers);
   const formik = useFormik({
     initialValues,
     validationSchema: Yup.object({
       email: Yup.string().required("required"),
     }),
     onSubmit: (e) => {
-      console.log(e);
-      navigate("/auth/change-password");
+      let result = allUser?.find((user) => user?.email === e.email);
+      if (result === undefined) {
+        toast.error("Email is incorrect!");
+      } else {
+        dispath(changeConfirmPassword(result));
+        navigate("/auth/change-password");
+      }
     },
   });
   const handleClose = () => {

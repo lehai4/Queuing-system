@@ -19,7 +19,20 @@ const Selected = (props: SelectProp) => {
     SelectedProps[]
   >([]);
   // select
-  let valueCurr = { label: value, value: value };
+  let valueCurr = {
+    label:
+      value === true
+        ? "Hoạt động"
+        : value === false
+        ? "Ngưng hoạt động"
+        : value,
+    value:
+      value === true
+        ? "Hoạt động"
+        : value === false
+        ? "Ngưng hoạt động"
+        : value,
+  };
   const handleSelectChange = (e: any) => {
     setSelectedOption(e);
     handleChange({

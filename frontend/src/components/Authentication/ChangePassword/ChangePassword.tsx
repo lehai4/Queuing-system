@@ -6,31 +6,40 @@ import { useNavigate } from "react-router-dom";
 import { toast } from "react-toastify";
 import * as Yup from "yup";
 import { Button, Input, Wrapper } from "../../index";
+import { useAppSelector } from "../../../hooks/hooks";
+import { updateUser } from "../../../redux/apiRequest";
 export interface initialize {
   password: string;
-  confirmPassword: string;
+  confirmpassword: string;
 }
-let initialValues: initialize = {
-  password: "",
-  confirmPassword: "",
-};
 
 const ChangePassword = () => {
-  const [toggle, setToggle] = useState<boolean>(false);
-  const [toggleConfirm, setToggleConfirm] = useState<boolean>(false);
+  const user = useAppSelector((state) => state.users.passwordChange);
+  const [toggle, setToggle] = useState<boolean>(true);
+  const [toggleConfirm, setToggleConfirm] = useState<boolean>(true);
 
   const navigate = useNavigate();
+  let initialValues: initialize = {
+    password: user?.password ?? "",
+    confirmpassword: "",
+  };
   const formik = useFormik({
     initialValues,
     validationSchema: Yup.object({
       password: Yup.string().required("Required"),
-      confirmPassword: Yup.string()
+      confirmpassword: Yup.string()
         .required("Required")
         .oneOf([Yup.ref("password")], 'Must match "password" field value'),
     }),
-    onSubmit: (e) => {
-      toast.success("Đổi mật khẩu thành công");
-      navigate("/auth");
+    onSubmit: async (e) => {
+      await updateUser(user?._id, e)
+        .then(() => {
+          toast.success("password updated successfully!");
+          navigate("/auth");
+        })
+        .catch((err) => {
+          toast.error(err.message);
+        });
     },
   });
   const handleToggle = () => {
@@ -78,12 +87,12 @@ const ChangePassword = () => {
         <Wrapper className="flex flex-row items-center">
           <Input
             typeInput={toggleConfirm ? "password" : "text"}
-            id="confirmPassword"
-            name="confirmPassword"
+            id="confirmpassword"
+            name="confirmpassword"
             placeholder=""
             className="mt-2 mb-3"
             width={400}
-            value={formik.values.confirmPassword}
+            value={formik.values.confirmpassword}
             handleChange={formik.handleChange}
           />
           <div onClick={handleToggleConfirm}>
@@ -98,8 +107,8 @@ const ChangePassword = () => {
           </div>
         </Wrapper>
       </Wrapper>
-      {formik.errors.confirmPassword && (
-        <p className="mes__error">{formik.errors.confirmPassword}</p>
+      {formik.errors.confirmpassword && (
+        <p className="mes__error">{formik.errors.confirmpassword}</p>
       )}
       <Wrapper className="btn btn-login mt-5 flex flex-row items-center justify-center gap-5">
         <Button

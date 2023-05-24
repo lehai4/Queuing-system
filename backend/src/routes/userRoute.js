@@ -10,11 +10,7 @@ router.get(
 );
 router.get("/", middlewareController.verifyToken, userController.getAllUsers);
 
-router.put(
-  "/update/:id",
-  middlewareController.verifyToken,
-  userController.updateUser
-);
+router.put("/update/:id", userController.updateUser);
 router.delete(
   "/:id",
   middlewareController.verifyTokenAndAdminAuth,

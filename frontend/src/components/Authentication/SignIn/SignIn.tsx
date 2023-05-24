@@ -7,6 +7,7 @@ import { Button, Input, Wrapper } from "../../index";
 import { SvgIcon } from "@mui/material";
 import { MdVisibility, MdVisibilityOff } from "react-icons/md";
 import { useRef, useState } from "react";
+import { toast } from "react-toastify";
 export interface initialize {
   username: string;
   password: string;
@@ -16,7 +17,7 @@ let initialValues: initialize = {
   password: "",
 };
 const SignIn = () => {
-  const [toggle, setToggle] = useState<boolean>(false);
+  const [toggle, setToggle] = useState<boolean>(true);
   const refVisibility = useRef(null);
   const navigate = useNavigate();
   const dispatch = useDispatch();
@@ -32,7 +33,7 @@ const SignIn = () => {
         .matches(/[^\w]/, "Password requires a symbol"),
     }),
     onSubmit: async (e) => {
-      signInUser(e, dispatch, navigate);
+      await signInUser(e, dispatch, navigate);
     },
   });
   const handleToggle = () => {
