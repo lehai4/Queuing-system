@@ -9,6 +9,7 @@ async function connect() {
     console.log("Connect successfully");
   } catch (err) {
     console.error(err);
+    process.exit(1);
   }
 }
 module.exports = { connect };

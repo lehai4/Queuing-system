@@ -5,6 +5,15 @@ const jwt = require("jsonwebtoken");
 let refreshTokens = [];
 
 const authController = {
+  //GET ALL USER
+  getDefaultAllUser: async (req, res) => {
+    try {
+      const user = await User.find();
+      return res.status(200).json(user);
+    } catch (err) {
+      res.status(500).json(err);
+    }
+  },
   // [GET]/news
   registerUser: async (req, res) => {
     try {

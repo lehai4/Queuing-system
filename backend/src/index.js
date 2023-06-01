@@ -1,5 +1,6 @@
 const express = require("express");
 const morgan = require("morgan");
+const http = require("http");
 const bodyParser = require("body-parser");
 const cors = require("cors");
 const dotenv = require("dotenv");
@@ -12,19 +13,17 @@ db.connect();
 
 dotenv.config();
 const app = express();
-const port = 3001;
+const port = `${process.env.PORT}` || 3001;
 
 app.use(cors());
-app.use(cookieParser());
 app.use(express.json());
-
-// middleware handle for res.body
 app.use(
   express.urlencoded({
     extended: true,
   })
 );
-app.use(express.json());
+app.use(cookieParser());
+
 app.use(bodyParser.json());
 
 //HTTP logger
@@ -33,7 +32,9 @@ app.use(morgan("combined"));
 //Routes init
 route(app);
 
+const server = http.createServer(app);
+
 // 127.0.0.1
-app.listen(port, () => {
+server.listen(port, () => {
   console.log(`Example app listening on port http://localhost:${port}`);
 });
