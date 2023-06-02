@@ -17,6 +17,7 @@ import {
   GrantNumber,
   Home,
   ManagerAccount,
+  ManagerRule,
   Report,
   Service,
   Setting,
@@ -87,6 +88,7 @@ const Router: React.FunctionComponent<IRouterProps> = () => {
       />
       <Route path="/cai-dat">
         <Route path="quan-li-tai-khoan" element={<ManagerAccount />} />
+        <Route path="quan-li-vai-tro" element={<ManagerRule />} />
       </Route>
 
       <Route path="/profile" element={<Profile />} />

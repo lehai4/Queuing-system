@@ -2,9 +2,9 @@
   "name": "blogfirst",
   "version": "1.0.0",
   "description": "blog first",
-  "main": "src/api/index.js",
+  "main": "api/index.js",
   "scripts": {
-    "start": "nodemon --inspect src/api/index.js",
+    "start": "nodemon --inspect api/index.js",
     "watch": "node-sass --watch src/resources/scss/app.scss src/public/css/app.css",
     "format": "prettier --single-quote --trailing-comma all --tab-width 2 --write src/**/*.{js,json,scss}",
     "test": "echo \"Error: no test specified\" && exit 1"

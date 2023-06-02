@@ -9,6 +9,7 @@ router.post("/register", authController.registerUser);
 router.post("/signIn", authController.loginUser);
 
 router.get("/", authController.getDefaultAllUser);
+
 // refresh
 router.post("/refresh", authController.requestRefreshToken);
 
