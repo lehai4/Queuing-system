@@ -15,12 +15,16 @@ import {
   Wrapper,
 } from "..";
 import app from "../../database/firebaseConfig";
-import { useAppSelector } from "../../hooks/hooks";
+import { useAppDispatch, useAppSelector } from "../../hooks/hooks";
+import { addHistorySession } from "../../redux/historySlice";
 import { ApplianceProp } from "../../typeProps";
+import { formatTimeStamp_version2 } from "../../utils/formatTimeStamp_version2";
 
 const ApplianceFormAdd = () => {
   const navigate = useNavigate();
+  const dispatch = useAppDispatch();
   const dbRef = ref(getDatabase(app));
+  const user = useAppSelector((state) => state?.auth?.login?.currentUser?.user);
   const data = useAppSelector(
     (state) => state.appliances.appliance.applianceArr
   );
@@ -62,6 +66,13 @@ const ApplianceFormAdd = () => {
       passSignIn: Yup.string().required("required"),
     }),
     onSubmit: (e) => {
+      const object = {
+        user: user?.username,
+        timestamp: formatTimeStamp_version2(new Date()),
+        Ip: "192.168.1.1",
+        action: `Thêm thiết bị ${e.uId}`,
+      };
+      dispatch(addHistorySession(object));
       handleWriteDatabase(e);
     },
   });

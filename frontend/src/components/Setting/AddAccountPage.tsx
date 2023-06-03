@@ -16,8 +16,10 @@ import {
   User,
   Wrapper,
 } from "..";
-import { useAppDispatch } from "../../hooks/hooks";
+import { useAppDispatch, useAppSelector } from "../../hooks/hooks";
 import { registerUser } from "../../redux/apiRequest";
+import { formatTimeStamp_version2 } from "../../utils/formatTimeStamp_version2";
+import { addHistorySession } from "../../redux/historySlice";
 type AccountInterface = {
   name: string;
   username: string;
@@ -31,6 +33,7 @@ type AccountInterface = {
 const AddAccountPage = () => {
   const navigate = useNavigate();
   const dispatch = useAppDispatch();
+  const user = useAppSelector((state) => state?.auth?.login?.currentUser?.user);
   const [toggle, setToggle] = useState<boolean>(false);
   const [toggleConfirm, setToggleConfirm] = useState<boolean>(false);
   const refVisibility = useRef(null);
@@ -70,8 +73,15 @@ const AddAccountPage = () => {
         ...e,
         active: e.active === "Hoạt động" ? true : false,
       };
+      const object = {
+        user: user?.username,
+        timestamp: formatTimeStamp_version2(new Date()),
+        Ip: "192.168.1.1",
+        action: `Thêm tài khoản với username: ${e.username}`,
+      };
       await registerUser(dataOverrides, dispatch)
         .then(() => {
+          dispatch(addHistorySession(object));
           toast.success("Add account successfully!");
           navigate(-1);
         })

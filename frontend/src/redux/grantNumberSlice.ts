@@ -1,9 +1,8 @@
-import { createSlice, createAsyncThunk } from "@reduxjs/toolkit";
-import { GrantNumberInterface } from "../typeProps";
 import type { PayloadAction } from "@reduxjs/toolkit";
-import { child, get, getDatabase, ref, set } from "firebase/database";
+import { createAsyncThunk, createSlice } from "@reduxjs/toolkit";
+import { child, get, getDatabase, ref } from "firebase/database";
 import app from "../database/firebaseConfig";
-import { toast } from "react-toastify";
+import { GrantNumberInterface } from "../typeProps";
 
 const dbRef = ref(getDatabase(app));
 type grantProps = {

@@ -14,6 +14,17 @@ export interface User {
   updatedAt: string;
   _v: number;
 }
+export interface PropsHistory {
+  user: string | undefined;
+  timestamp: string;
+  Ip: string;
+  action: string;
+}
+export interface Rule {
+  nameRule: string;
+  numberRule: number;
+  desc: string;
+}
 interface currentUserProps {
   user?: User | null | undefined;
   accessToken: string;

@@ -4,6 +4,8 @@ import { Header, Helmet, User, Wrapper } from ".";
 import profileDefault from "../assets/img/profile.png";
 import { useAppDispatch, useAppSelector } from "../hooks/hooks";
 import { getUserById, updateUser } from "../redux/apiRequest";
+import { formatTimeStamp_version2 } from "../utils/formatTimeStamp_version2";
+import { addHistorySession } from "../redux/historySlice";
 
 function convertToBase64(file: any) {
   return new Promise((resolve, reject) => {
@@ -22,6 +24,9 @@ const Profile = () => {
   const imageRef = useRef(null);
   const dispatch = useAppDispatch();
   const user = useAppSelector((state) => state.auth.login.currentUser);
+  const userCurrent = useAppSelector(
+    (state) => state?.auth?.login?.currentUser?.user
+  );
   const [post, setPost] = useState<any>({ myfile: "" });
   let profileLeft = [
     {
@@ -54,9 +59,16 @@ const Profile = () => {
   const handleFileUpload = async (e: any) => {
     let file = e.target.files[0];
     const base64 = await convertToBase64(file);
+    const object = {
+      user: userCurrent?.username,
+      timestamp: formatTimeStamp_version2(new Date()),
+      Ip: "192.168.1.1",
+      action: `Cập nhật profile User: ${userCurrent?.username}`,
+    };
     setPost({ ...post, myfile: base64 });
     await updateUser(user?.user?._id, { image: base64 });
     await getUserById(user?.user?._id, dispatch, user?.accessToken);
+    dispatch(addHistorySession(object));
   };
 
   return (

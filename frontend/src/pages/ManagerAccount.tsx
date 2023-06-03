@@ -65,7 +65,7 @@ const ManagerAccount = () => {
       allowOverflow: true,
       button: true,
       center: false,
-      width: "220px",
+      width: "215px",
     },
   ];
   const [role, setRole] = useState<string>("Tất cả");
@@ -100,7 +100,7 @@ const ManagerAccount = () => {
           title="Cài đặt hệ thống"
           direct={true}
           redirect={false}
-          path="cai-dat"
+          path="cai-dat/quan-li-tai-khoan"
           slug="/"
           showRedirection=""
           showDirection="Quản lý tài khoản"

@@ -19,9 +19,6 @@ const Sidebar = () => {
   const location = useLocation();
   const { pathname } = location;
 
-  const trigger = useRef(null);
-  const sidebar = useRef(null);
-
   const storedSidebarExpanded = localStorage.getItem("sidebar-expanded");
   const [sidebarExpanded, setSidebarExpanded] = useState(
     storedSidebarExpanded === null ? false : storedSidebarExpanded === "true"
@@ -30,7 +27,7 @@ const Sidebar = () => {
     logOut(dispatch, navigate, currentUser?.accessToken ?? "");
   };
   const activeLink =
-    "flex items-center mb-1 gap-3 pl-7 pb-15-override pt-15-override text-white  text-md";
+    "flex items-center mb-1 gap-3 pl-7 pb-15-override pt-15-override text-white text-md";
   const normalLink =
     "flex items-center mb-1 gap-3 pl-7 pb-15-override pt-15-override text-md text-gray-700 dark:text-gray-200 dark:hover:text-black hover:bg-light-gray";
 
@@ -82,9 +79,17 @@ const Sidebar = () => {
                       }}
                     >
                       <div className="flex items-center justify-between">
-                        <div className="flex items-center">
-                          <img src={`${iconCatdat}`} alt="" />
-                          <span className="capitalize ml-3 ">Cài đặt</span>
+                        <div className={`flex items-center`}>
+                          <span className={`${open && "icon-setting"}`}>
+                            <img src={`${iconCatdat}`} alt="" />
+                          </span>
+                          <span
+                            className={`capitalize ml-3 ${
+                              !open ? "text-black" : ""
+                            }`}
+                          >
+                            Cài đặt
+                          </span>
                         </div>
                         {/* Icon */}
                         <div className="flex shrink-0 ml-2">
@@ -132,7 +137,7 @@ const Sidebar = () => {
                         <li className="my-4 last:mb-0">
                           <NavLink
                             end
-                            to="/cai-dat/history-user"
+                            to="/cai-dat/history-active"
                             className={({ isActive }) =>
                               "block transition duration-150 truncate " +
                               (isActive ? "text-white" : "hover:opacity-70")

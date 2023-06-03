@@ -15,6 +15,7 @@ import { useAppSelector } from "../hooks/hooks";
 import {
   Appliance,
   GrantNumber,
+  HistoryActive,
   Home,
   ManagerAccount,
   ManagerRule,
@@ -89,6 +90,7 @@ const Router: React.FunctionComponent<IRouterProps> = () => {
       <Route path="/cai-dat">
         <Route path="quan-li-tai-khoan" element={<ManagerAccount />} />
         <Route path="quan-li-vai-tro" element={<ManagerRule />} />
+        <Route path="history-active" element={<HistoryActive />} />
       </Route>
 
       <Route path="/profile" element={<Profile />} />

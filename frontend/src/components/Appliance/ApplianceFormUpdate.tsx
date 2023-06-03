@@ -16,14 +16,18 @@ import {
   Wrapper,
 } from "..";
 import app from "../../database/firebaseConfig";
-import { useAppSelector } from "../../hooks/hooks";
+import { useAppDispatch, useAppSelector } from "../../hooks/hooks";
+import { addHistorySession } from "../../redux/historySlice";
 import { ApplianceProp } from "../../typeProps";
+import { formatTimeStamp_version2 } from "../../utils/formatTimeStamp_version2";
 
 type PropsApplianceFormUpdate = {
   getProductBySlug: (value: string) => ApplianceProp | undefined;
 };
 const ApplianceFormUpdate = (props: PropsApplianceFormUpdate) => {
   const { slug } = useParams();
+  const dispatch = useAppDispatch();
+  const user = useAppSelector((state) => state?.auth?.login?.currentUser?.user);
   const data = props.getProductBySlug(slug ?? "");
   const appliance = useAppSelector(
     (state) => state.appliances.appliance.applianceArr
@@ -83,10 +87,17 @@ const ApplianceFormUpdate = (props: PropsApplianceFormUpdate) => {
       passSignIn: Yup.string().required("required"),
     }),
     onSubmit: (e) => {
+      const object = {
+        user: user?.username,
+        timestamp: formatTimeStamp_version2(new Date()),
+        Ip: "192.168.1.1",
+        action: `Cập nhật thông tin thiết bị ${e.uId}`,
+      };
       if (handleCompared(e, initialValues)) {
         toast.error("data has not changed!");
       } else {
         handleUpdateDb(e);
+        dispatch(addHistorySession(object));
         toast.success("update successfully!");
         navigate("/thiet-bi");
       }

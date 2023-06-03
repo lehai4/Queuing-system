@@ -18,6 +18,9 @@ import {
 } from "..";
 import { updateUser } from "../../redux/apiRequest";
 import { AccountProps } from "../../typeProps";
+import { useAppDispatch, useAppSelector } from "../../hooks/hooks";
+import { formatTimeStamp_version2 } from "../../utils/formatTimeStamp_version2";
+import { addHistorySession } from "../../redux/historySlice";
 
 type PropsUpdateAcountPage = {
   getUserBySlug: (value: string) => AccountProps | undefined;
@@ -38,6 +41,8 @@ const active = [true, false];
 const UpdateAcountPage = (props: PropsUpdateAcountPage) => {
   const { slug } = useParams();
   const data = props.getUserBySlug(slug ?? "");
+  const dispatch = useAppDispatch();
+  const user = useAppSelector((state) => state?.auth?.login?.currentUser?.user);
   const [toggle, setToggle] = useState<boolean>(false);
   const [toggleConfirm, setToggleConfirm] = useState<boolean>(false);
   const refVisibility = useRef(null);
@@ -93,11 +98,18 @@ const UpdateAcountPage = (props: PropsUpdateAcountPage) => {
         active:
           e.active === "Hoạt động" ? true : e.active === true ? true : false,
       };
+      const object = {
+        user: user?.username,
+        timestamp: formatTimeStamp_version2(new Date()),
+        Ip: "192.168.1.1",
+        action: `Cập nhật tài khoản có username: ${e.username}`,
+      };
       if (handleCompared(dataOverrides, initialValues)) {
         toast.error("data has not changed!");
       } else {
         await updateUser(dataOverrides._id, dataOverrides)
           .then(() => {
+            dispatch(addHistorySession(object));
             toast.success("Updated account successfully!");
             navigate("/cai-dat/quan-li-tai-khoan");
           })

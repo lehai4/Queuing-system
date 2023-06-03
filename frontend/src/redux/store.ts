@@ -3,6 +3,7 @@ import authReducer from "./authSlice";
 import userReducer from "./userSlice";
 import applianceReducer from "./applianceSlice";
 import grantNumberReducer from "./grantNumberSlice";
+import historyReducer from "./historySlice";
 import {
   persistStore,
   persistReducer,
@@ -25,6 +26,7 @@ const rootReducer = combineReducers({
   users: userReducer,
   appliances: applianceReducer,
   grantNumbers: grantNumberReducer,
+  historySession: historyReducer,
 });
 const persistedReducer = persistReducer(persistConfig, rootReducer);
 const store = configureStore({

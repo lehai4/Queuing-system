@@ -8,8 +8,10 @@ import { useAppDispatch, useAppSelector } from "../../hooks/hooks";
 import { addGrantNumberNew } from "../../redux/grantNumberSlice";
 import { GrantNumberInterface } from "../../typeProps";
 import ModalViewPrinterNumber from "../Modal/ModalViewPrinterNumber";
+import { formatTimeStamp_version2 } from "../../utils/formatTimeStamp_version2";
+import { addHistorySession } from "../../redux/historySlice";
 const GrantNumberNew = () => {
-  const user = useAppSelector((state) => state.auth.login.currentUser?.user);
+  const user = useAppSelector((state) => state?.auth?.login?.currentUser?.user);
   const grantNumber = useAppSelector(
     (state) => state.grantNumbers.grantNumber.grantArr
   );
@@ -30,6 +32,13 @@ const GrantNumberNew = () => {
   const closeModal = () => {
     setToggle(false);
     dispatch(addGrantNumberNew(dataObj));
+    const object = {
+      user: user?.username,
+      timestamp: formatTimeStamp_version2(new Date()),
+      Ip: "192.168.1.1",
+      action: `Cấp số mới: số ${dataObj.stt}`,
+    };
+    dispatch(addHistorySession(object));
     handleWriteDatabase(dataObj, grantNumber.length + 1);
   };
   const handleWriteDatabase = (data: GrantNumberInterface, id: number) => {

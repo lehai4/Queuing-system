@@ -7,3 +7,4 @@ export { default as Service } from "./Service";
 export { default as Setting } from "./Setting";
 export { default as ManagerAccount } from "./ManagerAccount";
 export { default as ManagerRule } from "./ManagerRule";
+export { default as HistoryActive } from "./HistoryActive";

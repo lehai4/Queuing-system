@@ -17,6 +17,8 @@ import { paginationComponentOptions, statusGrant } from "../mock/dummy";
 import { fetchGrantNumber } from "../redux/grantNumberSlice";
 import { ReportInterface } from "../typeProps";
 import { formatTimeStamp } from "../utils/formatTimeStamp";
+import { formatTimeStamp_version2 } from "../utils/formatTimeStamp_version2";
+import { addHistorySession } from "../redux/historySlice";
 
 const timesGrant = (data: any) => {
   return <span>{formatTimeStamp(data)}</span>;
@@ -25,6 +27,7 @@ const timesGrant = (data: any) => {
 const Report = () => {
   const pdfRef = useRef(null);
   const dispatch = useAppDispatch();
+  const user = useAppSelector((state) => state?.auth?.login?.currentUser?.user);
   const grantNumbers = useAppSelector(
     (state) => state.grantNumbers.grantNumber.grantArr
   );
@@ -101,6 +104,13 @@ const Report = () => {
       );
       docs.save("report.pdf");
     });
+    const object = {
+      user: user?.username,
+      timestamp: formatTimeStamp_version2(new Date()),
+      Ip: "192.168.1.1",
+      action: `Tải file báo cáo (pdf)`,
+    };
+    dispatch(addHistorySession(object));
   };
   useEffect(() => {
     setReportArr(grantNumbers);
@@ -132,7 +142,7 @@ const Report = () => {
           title="Báo cáo"
           direct={true}
           redirect={false}
-          path="bao- cao"
+          path="bao-cao"
           slug="/"
           showRedirection=""
           showDirection="Lập báo cáo"
