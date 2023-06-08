@@ -4,7 +4,7 @@ import { Header, Wrapper } from "../components";
 import { notifiItem } from "../mock/dummy";
 const formatTimeStamp = (value: any) => {
   var hours = value.getHours();
-  var minutes = value.getMinutes();
+  var minutes = String(value.getMinutes()).padStart(2, "0");
   var formattedTime =
     hours + "h" + minutes + " ngày " + moment(value).format("DD/MM/YYYY");
   return formattedTime;
