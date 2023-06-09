@@ -66,7 +66,15 @@ export const getUserById = async (id: any, dispatch: any, accessToken: any) => {
 export const registerUser = async (user: any, dispatch: any) => {
   dispatch(registerStart());
   try {
-    await axios.post(`http://localhost:3001/v1/auth/register`, user);
+    // await axios.post(`https://queuing-api.vercel.app/v1/auth/register`, user);
+    await axios({
+      method: "POST",
+      url: `https://queuing-api.vercel.app/v1/auth/register`,
+      data: user,
+      headers: {
+        "Content-Type": "application/json",
+      },
+    });
     dispatch(registerSuccess());
   } catch (e) {
     dispatch(registerFailure());
@@ -75,9 +83,17 @@ export const registerUser = async (user: any, dispatch: any) => {
 export const getAllUsers = async (accesssToken: string, dispatch: any) => {
   dispatch(getUsersStart());
   try {
-    const res: any = await axios.get(`http://localhost:3001/v1/user`, {
-      headers: { token: `Bearer ${accesssToken}` },
+    const res: any = await axios({
+      method: "GET",
+      url: `http://localhost:3001/v1/user`,
+      headers: {
+        "Content-Type": "application/json",
+        token: `Bearer ${accesssToken}`,
+      },
     });
+    // const res: any = await axios.get(`https://queuing-api.vercel.app/v1/user`, {
+    //   headers: { token: `Bearer ${accesssToken}` },
+    // });
     dispatch(getUsersSuccess(res.data));
   } catch (e) {
     dispatch(getUsersFailure());
@@ -90,7 +106,7 @@ export const logOut = async (
 ) => {
   dispatch(logOutStart());
   try {
-    await axios.post(`http://localhost:3001/v1/auth/logout`, {
+    await axios.post(`https://queuing-api.vercel.app/v1/auth/logout`, {
       headers: { token: `Bearer ${accesccToken}` },
     });
     dispatch(logOutSuccess());
@@ -109,7 +125,7 @@ export const deleteUser = async (
   dispatch(deleteUserStart());
   try {
     const res: any = await axiosJWT.delete(
-      `http://localhost:3001/v1/user/${id}`,
+      `https://queuing-api.vercel.app/v1/user/${id}`,
       {
         headers: { token: `Bearer ${accesssToken}` },
       }
