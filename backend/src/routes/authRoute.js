@@ -5,34 +5,34 @@ const middlewareController = require("../app/controllers/middlewareController");
 // Register
 router.post(
   "/register",
-  middlewareController.middlewareCORS,
+  // middlewareController.middlewareCORS,
   authController.registerUser
 );
 
 // signIn
 router.post(
   "/signIn",
-  middlewareController.middlewareCORS,
+  // middlewareController.middlewareCORS,
   authController.loginUser
 );
 
 router.get(
   "/",
-  middlewareController.middlewareCORS,
+  // middlewareController.middlewareCORS,
   authController.getDefaultAllUser
 );
 
 // refresh
 router.post(
   "/refresh",
-  middlewareController.middlewareCORS,
+  // middlewareController.middlewareCORS,
   authController.requestRefreshToken
 );
 
 // logout
 router.post(
   "/logout",
-  middlewareController.middlewareCORS,
+  // middlewareController.middlewareCORS,
   middlewareController.verifyToken,
   authController.userLogout
 );
