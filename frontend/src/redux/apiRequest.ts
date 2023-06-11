@@ -86,6 +86,8 @@ export const getAllUsers = async (accesssToken: string, dispatch: any) => {
       method: "GET",
       url: `http://localhost:3001/v1/user`,
       headers: {
+        credentials: "include",
+        withCredentials: true,
         "Content-Type": "application/json",
         token: `Bearer ${accesssToken}`,
       },

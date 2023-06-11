@@ -5,27 +5,16 @@ const middlewareController = require("../app/controllers/middlewareController");
 
 router.get(
   "/:id",
-  // middlewareController.middlewareCORS,
   middlewareController.verifyToken,
   userController.getUserById
 );
-router.get(
-  "/",
-  // middlewareController.middlewareCORS,
-  middlewareController.verifyToken,
-  userController.getAllUsers
-);
+router.get("/", middlewareController.verifyToken, userController.getAllUsers);
 
-router.put(
-  "/update/:id",
-  // middlewareController.middlewareCORS,
-  userController.updateUser
-);
+router.put("/update/:id", userController.updateUser);
+
 router.delete(
   "/:id",
-  // middlewareController.middlewareCORS,
   middlewareController.verifyTokenAndAdminAuth,
-  // middlewareController.verifyToken,
   userController.deleteUser
 );
 module.exports = router;

@@ -3,36 +3,17 @@ const router = express.Router();
 const authController = require("../app/controllers/authController");
 const middlewareController = require("../app/controllers/middlewareController");
 // Register
-router.post(
-  "/register",
-  // middlewareController.middlewareCORS,
-  authController.registerUser
-);
+router.post("/register", authController.registerUser);
 
 // signIn
-router.post(
-  "/signIn",
-  // middlewareController.middlewareCORS,
-  authController.loginUser
-);
-
-router.get(
-  "/",
-  // middlewareController.middlewareCORS,
-  authController.getDefaultAllUser
-);
+router.post("/signIn", authController.loginUser);
 
 // refresh
-router.post(
-  "/refresh",
-  // middlewareController.middlewareCORS,
-  authController.requestRefreshToken
-);
+router.post("/refresh", authController.requestRefreshToken);
 
 // logout
 router.post(
   "/logout",
-  // middlewareController.middlewareCORS,
   middlewareController.verifyToken,
   authController.userLogout
 );

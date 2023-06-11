@@ -5,15 +5,6 @@ const jwt = require("jsonwebtoken");
 let refreshTokens = [];
 
 const authController = {
-  //GET ALL USER
-  getDefaultAllUser: async (req, res) => {
-    try {
-      const user = await User.find();
-      return res.status(200).json(user);
-    } catch (err) {
-      res.status(500).json(err);
-    }
-  },
   // [GET]/news
   registerUser: async (req, res) => {
     try {
@@ -64,6 +55,7 @@ const authController = {
       { expiresIn: "365d" }
     );
   },
+
   loginUser: async (req, res) => {
     try {
       const user = await User.findOne({
@@ -95,6 +87,7 @@ const authController = {
       return res.status(500).json(err);
     }
   },
+
   requestRefreshToken: async (req, res) => {
     //Take refresh token from user
     const refreshToken = req.cookies.refreshToken;
