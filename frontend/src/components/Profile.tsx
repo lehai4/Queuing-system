@@ -6,6 +6,7 @@ import { useAppDispatch, useAppSelector } from "../hooks/hooks";
 import { getUserById, updateUser } from "../redux/apiRequest";
 import { formatTimeStamp_version2 } from "../utils/formatTimeStamp_version2";
 import { addHistorySession } from "../redux/historySlice";
+import resizeFile from "../utils/resizeImage";
 
 function convertToBase64(file: any) {
   return new Promise((resolve, reject) => {
@@ -58,7 +59,11 @@ const Profile = () => {
   ];
   const handleFileUpload = async (e: any) => {
     let file = e.target.files[0];
-    const base64 = await convertToBase64(file);
+    const base64 =
+      file.size > 23000
+        ? await resizeFile(file, 100, 100, 40)
+        : await convertToBase64(file);
+
     const object = {
       user: userCurrent?.username,
       timestamp: formatTimeStamp_version2(new Date()),
