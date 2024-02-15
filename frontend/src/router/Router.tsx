@@ -39,14 +39,14 @@ const Router: React.FunctionComponent<IRouterProps> = () => {
     granNumber.find((e) => e.stt == slug);
   return (
     <Routes>
-      <Route path="/dashboard" element={<Home />} />
+      <Route path="/trang-chu" element={<Home />} />
       <Route
         path="/"
         element={
           user === undefined ? (
             <Navigate to="/auth" />
           ) : (
-            <Navigate to="/dashboard" />
+            <Navigate to="/trang-chu" />
           )
         }
       />

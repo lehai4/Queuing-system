@@ -1,12 +1,8 @@
 import active from "../assets/icon/active.png";
-import iconBaocao from "../assets/icon/baocao.png";
 import iconOne from "../assets/icon/calender.png";
 import iconTwo from "../assets/icon/calender1.png";
-import iconCapso from "../assets/icon/capso.png";
 import iconThree from "../assets/icon/contact.png";
-import iconDashboard from "../assets/icon/dashboard.png";
 import iconDescrease from "../assets/icon/decrease.png";
-import iconDichvu from "../assets/icon/dichvu.png";
 import {
   default as disabled,
   default as dotboqa,
@@ -16,7 +12,6 @@ import dotWaiting from "../assets/icon/dotdangcho.png";
 import grantnumber from "../assets/icon/icon dasboard03.png";
 import iconInscrease from "../assets/icon/increase.png";
 import service from "../assets/icon/mess.png";
-import iconMoniter from "../assets/icon/monitor.png";
 import monitorMinor from "../assets/icon/monitorMinor.png";
 import iconFour from "../assets/icon/star.png";
 type gridActiveAplianceProps = {
@@ -28,38 +23,6 @@ type gridConnectAplianceProps = {
 type gridStatusAccountProps = {
   active: boolean;
 };
-export const links = [
-  {
-    name: "Daskboard",
-    iconVector: iconDashboard,
-    path: "dashboard",
-    children: "",
-  },
-  {
-    name: "Thiết bị",
-    iconVector: iconMoniter,
-    path: "/thiet-bi",
-    children: "",
-  },
-  {
-    name: "Dịch vụ",
-    iconVector: iconDichvu,
-    path: "/dich-vu",
-    children: "",
-  },
-  {
-    name: "Cấp số",
-    iconVector: iconCapso,
-    path: "/cap-so",
-    children: "",
-  },
-  {
-    name: "Báo cáo",
-    iconVector: iconBaocao,
-    path: "/bao-cao",
-    children: "",
-  },
-];
 
 export const gridActiveApliance = (props: gridActiveAplianceProps) => (
   <>

@@ -70,7 +70,7 @@ const User = ({ isLayoutChange }: UserProp) => {
           </Wrapper>
         </Link>
       </Wrapper>
-      {toggle && <Notification isLayoutChange={isLayoutChange} />}
+      {/* {toggle && <Notification isLayoutChange={isLayoutChange} />} */}
     </Wrapper>
   );
 };
