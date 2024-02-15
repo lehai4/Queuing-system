@@ -16,8 +16,8 @@ const HistoryActive = () => {
   const historySession = useAppSelector(
     (state) => state.historySession.historySession
   );
-  const [startDate, setStartDate] = useState<Date | undefined>(new Date());
-  const [endDate, setEndDate] = useState<Date | undefined>(new Date());
+  const [startDate, setStartDate] = useState<Date | undefined>();
+  const [endDate, setEndDate] = useState<Date | undefined>();
   const [history, setHistory] = useState<PropsHistory[]>([]);
   const [historyOriginal, setHistoryOriginal] = useState<PropsHistory[]>([]);
   const [searchInput, setSearchInput] = useState<string>("");

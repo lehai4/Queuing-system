@@ -31,8 +31,8 @@ const Report = () => {
   const grantNumbers = useAppSelector(
     (state) => state.grantNumbers.grantNumber.grantArr
   );
-  const [startDate, setStartDate] = useState<Date | undefined>(new Date());
-  const [endDate, setEndDate] = useState<Date | undefined>(new Date());
+  const [startDate, setStartDate] = useState<Date | undefined>();
+  const [endDate, setEndDate] = useState<Date | undefined>();
   const [reportArr, setReportArr] = useState<ReportInterface[]>([]);
   const [reportArrOriginal, setReportArrOriginal] = useState<ReportInterface[]>(
     []

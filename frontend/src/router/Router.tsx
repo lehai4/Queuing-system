@@ -21,7 +21,6 @@ import {
   ManagerRule,
   Report,
   Service,
-  Setting,
 } from "../pages";
 export interface IRouterProps {}
 const Router: React.FunctionComponent<IRouterProps> = () => {

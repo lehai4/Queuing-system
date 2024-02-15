@@ -14,8 +14,8 @@ const Service = () => {
   const [active, setActive] = useState<string>("Tất cả");
   const [searchInput, setSearchInput] = useState<string>("");
   const [serviceArr, setServiceArr] = useState<any[]>([]);
-  const [startDate, setStartDate] = useState<Date | undefined>(new Date());
-  const [endDate, setEndDate] = useState<Date | undefined>(new Date());
+  const [startDate, setStartDate] = useState<Date | undefined>();
+  const [endDate, setEndDate] = useState<Date | undefined>();
   return (
     <Wrapper className="md:mb-0 md:ml-0 mt-24 md:pb-6 md:pt-4 md:pl-6 bg-main-grey rounded-3xl">
       <div className="absolute md:static md:mb-7 dark:bg-main-dark-bg navbar">

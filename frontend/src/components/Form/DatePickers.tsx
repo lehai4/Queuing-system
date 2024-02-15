@@ -20,6 +20,7 @@ const DatePickers = (props: DatePickerProps) => {
           showIcon={props.showIcon}
           selected={props.valueStart}
           onChange={(date: Date) => props.setValueStart(date)}
+          placeholderText="dd/mm/yyyy"
         />
       ) : (
         <>
@@ -29,6 +30,7 @@ const DatePickers = (props: DatePickerProps) => {
             showIcon={props.showIcon}
             selected={props.valueStart}
             onChange={(date: Date) => props.setValueStart(date)}
+            placeholderText="dd/mm/yyyy"
           />
           <ArrowRightIcon />
           <DatePicker
@@ -40,6 +42,7 @@ const DatePickers = (props: DatePickerProps) => {
             endDate={props.valueEnd}
             showIcon={props.showIcon}
             minDate={props.valueStart}
+            placeholderText="dd/mm/yyyy"
           />
         </>
       )}

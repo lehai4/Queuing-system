@@ -28,7 +28,7 @@ export const signInUser = async (user: any, dispatch: any, navigate: any) => {
     );
     toast.success("Login successfully");
     dispatch(signInSuccess(res.data));
-    navigate("/dashboard");
+    navigate("/trang-chu");
   } catch (e) {
     toast.error("Username or password is incorrect!");
     dispatch(signInFailure());

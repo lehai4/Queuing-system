@@ -1,7 +1,7 @@
 import { SettingOutlined } from "@ant-design/icons";
 import { Menu, MenuProps } from "antd";
 import React from "react";
-import { Link, useNavigate } from "react-router-dom";
+import { Link, useLocation, useNavigate } from "react-router-dom";
 import iconBaocao from "../assets/icon/baocao.png";
 import iconCapso from "../assets/icon/capso.png";
 import iconDashboard from "../assets/icon/dashboard.png";
@@ -79,12 +79,12 @@ const Sidebar = () => {
   const bgColor = "#FFF2E7";
   const dispatch = useAppDispatch();
   const navigate = useNavigate();
+  const location = useLocation();
   const currentUser = useAppSelector((state) => state.auth.login.currentUser);
 
   const handleLogOut = () => {
     logOut(dispatch, navigate, currentUser?.accessToken ?? "");
   };
-
   return (
     <Wrapper className="h-screen md:overflow-hidden overflow-auto md:hover:overflow-auto relative">
       <div className="flex justify-center items-center">
@@ -98,7 +98,7 @@ const Sidebar = () => {
       <Wrapper className="mt-24 mt-24-override">
         <Menu
           mode="vertical"
-          defaultSelectedKeys={["/dashboard"]}
+          defaultSelectedKeys={[`${location.pathname}`]}
           onClick={(e) => {
             navigate(`${e.key}`);
           }}
